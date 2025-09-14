@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl6lidtdlkul5"]
+
+[ext_resource type="PackedScene" uid="uid://bf3nrgd83vnfw" path="res://Items/Candle/Candle.blend" id="1_rdt7g"]
+[ext_resource type="Shader" uid="uid://cjtsd7ff5hbel" path="res://Items/Candle/candle.gdshader" id="2_c6rel"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qtvd5"]
+render_priority = 0
+shader = ExtResource("2_c6rel")
+shader_parameter/time_speed = 1.5
+shader_parameter/flame_height = 1.0
+shader_parameter/distortion_strength = 0.2
+shader_parameter/flame_color = Color(1, 0.65, 0.2, 1)
+shader_parameter/glow_color = Color(1, 0.9, 0.6, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dd2hg"]
+size = Vector2(0.015, 0.05)
+orientation = 2
+
+[node name="Candle" instance=ExtResource("1_rdt7g")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0.125744, 0)
+light_color = Color(1, 0.705882, 0.458824, 1)
+light_size = 0.059
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.122877, 0)
+material_override = SubResource("ShaderMaterial_qtvd5")
+mesh = SubResource("PlaneMesh_dd2hg")

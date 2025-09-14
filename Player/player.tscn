@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://vgsou12k4ck"]
+
+[ext_resource type="PackedScene" uid="uid://diuchan7aq7bs" path="res://Player/lil_mouse_guy.tscn" id="1_4ntmi"]
+[ext_resource type="Script" uid="uid://b6c1xou4tolnr" path="res://Player/Scripts/player_movement.gd" id="1_btcbx"]
+[ext_resource type="Script" uid="uid://3tixhkc3wumr" path="res://Player/Scripts/camera_pivot.gd" id="2_btcbx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
+radius = 0.331061
+height = 1.39515
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "player_model")]
+script = ExtResource("1_btcbx")
+head = NodePath("CameraPivot")
+player_model = NodePath("LilMouseGuy")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698566, 0)
+shape = SubResource("CapsuleShape3D_4ntmi")
+
+[node name="LilMouseGuy" parent="." instance=ExtResource("1_4ntmi")]
+
+[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("target_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12507, 0)
+script = ExtResource("2_btcbx")
+target_node = NodePath(".")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+spring_length = 5.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
