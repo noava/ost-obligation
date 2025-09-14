@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dicdkiket4dqb"]
+[gd_scene load_steps=11 format=3 uid="uid://dicdkiket4dqb"]
 
 [ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_ffbi0"]
+[ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
 
 [sub_resource type="Gradient" id="Gradient_ffbi0"]
 colors = PackedColorArray(0, 0, 0.309804, 1, 0, 0, 0, 1)
@@ -75,6 +76,9 @@ transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 
 
 [node name="Cheese5" parent="Cheesus" instance=ExtResource("1_ffbi0")]
 transform = Transform3D(-0.127532, 0, 0.991834, 0, 1, 0, -0.991834, 0, -0.127532, 1.95508, 5.78562, -4.7151)
+
+[node name="Candle" parent="." instance=ExtResource("3_wa13d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.156312, 2.79922, 5.9217)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.643835, 3.19193, 6.65631)
