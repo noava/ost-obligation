@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://diuchan7aq7bs"]
+
+[ext_resource type="PackedScene" uid="uid://bec5rhe21wfu4" path="res://Player/LilMouseGuy.blend" id="1_pf7tj"]
+[ext_resource type="Script" uid="uid://c7vo6yeebd3mv" path="res://addons/so_fluffy/so_fluffy.gd" id="3_yg004"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_30hqb"]
+frequency = 0.0095
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yg004"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_30hqb")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ck4qv"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_30hqb")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gwkra"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_30hqb")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_smixh"]
+as_normal_map = true
+noise = SubResource("FastNoiseLite_30hqb")
+
+[node name="LilMouseGuy" instance=ExtResource("1_pf7tj")]
+
+[node name="Fur" type="Node" parent="Body" index="0"]
+script = ExtResource("3_yg004")
+seed = 25179
+turbulence_texture = SubResource("NoiseTexture2D_yg004")
+jitter_texture = SubResource("NoiseTexture2D_ck4qv")
+albedo_color = Color(0.513726, 0.392157, 0.215686, 1)
+metadata/_custom_type_script = "uid://c7vo6yeebd3mv"
+
+[node name="Fur" type="Node" parent="Head" index="0"]
+script = ExtResource("3_yg004")
+length = 0.06
+density = 0.8
+seed = 40092
+turbulence_texture = SubResource("NoiseTexture2D_gwkra")
+jitter_texture = SubResource("NoiseTexture2D_smixh")
+albedo_color = Color(0.513726, 0.392157, 0.215686, 1)
+emission_color = Color(0.871202, 0.802414, 0.596355, 1)
+stiffness = 0.0
+metadata/_custom_type_script = "uid://c7vo6yeebd3mv"
+
+[node name="Fur" type="Node" parent="Arms" index="0"]
+script = ExtResource("3_yg004")
+length = 0.09
+density = 0.8
+seed = 40092
+turbulence_texture = SubResource("NoiseTexture2D_gwkra")
+jitter_texture = SubResource("NoiseTexture2D_smixh")
+albedo_color = Color(0.513726, 0.392157, 0.215686, 1)
+metadata/_custom_type_script = "uid://c7vo6yeebd3mv"
+
+[node name="Fur" type="Node" parent="Tail" index="0"]
+script = ExtResource("3_yg004")
+seed = 40092
+scruffiness = 2.32
+curls_enabled = true
+turbulence_texture = SubResource("NoiseTexture2D_gwkra")
+jitter_texture = SubResource("NoiseTexture2D_smixh")
+albedo_color = Color(0.513726, 0.392157, 0.215686, 1)
+metadata/_custom_type_script = "uid://c7vo6yeebd3mv"
