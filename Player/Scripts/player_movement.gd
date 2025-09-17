@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 @export var head: Node3D
 @export var player_model: Node3D
+var input_direction: Vector2
 
 @export_category("Movement")
 @export_subgroup("Settings")
@@ -35,7 +36,7 @@ func move_player(delta):
 		acceleration = ACCELERATION
 	
 	# Walk
-	var input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction = (head.transform.basis * transform.basis * Vector3(input_direction.x, 0, input_direction.y)).normalized()
 	
 	velocity.x = move_toward(velocity.x, direction.x * speed, acceleration * delta)
