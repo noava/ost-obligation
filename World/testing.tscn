@@ -1,24 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://dicdkiket4dqb"]
+[gd_scene load_steps=19 format=3 uid="uid://dicdkiket4dqb"]
 
 [ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_ffbi0"]
 [ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="2_148ls"]
 [ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
-
-[sub_resource type="Gradient" id="Gradient_ffbi0"]
-colors = PackedColorArray(0, 0, 0.309804, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_148ls"]
-gradient = SubResource("Gradient_ffbi0")
+[ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_ga483"]
+[ext_resource type="Texture2D" uid="uid://qu8reg5gggha" path="res://World/forest.png" id="6_6c6s6"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
-night_sky = SubResource("GradientTexture2D_148ls")
+energy_multiplier = 0.0
 
 [sub_resource type="Sky" id="Sky_ga483"]
 sky_material = SubResource("PhysicalSkyMaterial_wa13d")
 
 [sub_resource type="Environment" id="Environment_ffbi0"]
 background_mode = 1
-background_color = Color(0.000835333, 0.117494, 0.105581, 1)
+background_color = Color(0.00644615, 0.357898, 0.329375, 1)
 sky = SubResource("Sky_ga483")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
@@ -27,27 +23,53 @@ glow_enabled = true
 glow_intensity = 2.0
 glow_bloom = 0.2
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.1576
-volumetric_fog_emission = Color(0.0267573, 0.114948, 0.224669, 1)
+volumetric_fog_density = 0.0089
+volumetric_fog_emission = Color(0.0087935, 0.0519986, 0.121127, 1)
 adjustment_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_148ls"]
 albedo_color = Color(0.0809816, 0.181853, 0.181858, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_wa13d"]
-size = Vector2(30, 30)
+size = Vector2(500, 500)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ga483"]
-size = Vector3(30, 0.01, 30)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_6c6s6"]
+data = PackedVector3Array(250, 0, 250, -250, 0, 250, 250, 0, -250, -250, 0, 250, -250, 0, -250, 250, 0, -250)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vr1eo"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("6_6c6s6")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_h084n"]
+size = Vector2(4.322, 2.161)
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6c6s6"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_vr1eo"]
+radius = 30.0
+height = 60.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_caefr"]
+albedo_color = Color(0, 0.43488, 0.437295, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_caefr"]
+material = SubResource("StandardMaterial3D_caefr")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6c6s6"]
 
 [node name="Testing" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
-transform = Transform3D(1, 0.000196407, -2.98385e-05, -3.90845e-05, 0.341711, 0.939805, 0.000194778, -0.939805, 0.341711, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.984808, 0.173648, 0, -0.173648, -0.984808, 0, 0, 0)
 light_color = Color(0, 0.275867, 0.278795, 1)
 shadow_enabled = true
+directional_shadow_max_distance = 200.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
 environment = SubResource("Environment_ffbi0")
@@ -59,7 +81,7 @@ mesh = SubResource("PlaneMesh_wa13d")
 [node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("BoxShape3D_ga483")
+shape = SubResource("ConcavePolygonShape3D_6c6s6")
 
 [node name="Cheesus" type="Node3D" parent="."]
 
@@ -75,11 +97,92 @@ transform = Transform3D(0.59325, 0, 0.805018, 0, 1, 0, -0.805018, 0, 0.59325, -2
 [node name="Cheese4" parent="Cheesus" instance=ExtResource("1_ffbi0")]
 transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 2.41622, 2.34316, 4.69852)
 
-[node name="Cheese5" parent="Cheesus" instance=ExtResource("1_ffbi0")]
-transform = Transform3D(-0.127532, 0, 0.991834, 0, 1, 0, -0.991834, 0, -0.127532, 1.95508, 5.78562, -4.7151)
-
-[node name="Candle" parent="." instance=ExtResource("3_wa13d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.156312, 2.79922, 5.9217)
-
 [node name="Player" parent="." instance=ExtResource("2_148ls")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80923, 0.0215109, 4.55441)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 3.52296)
+
+[node name="Candles" type="Node3D" parent="."]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.14113, 2.62034, 7.7726)
+
+[node name="Candle" parent="Candles" instance=ExtResource("3_wa13d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329277, 0)
+script = ExtResource("4_ga483")
+
+[node name="Candle2" parent="Candles" instance=ExtResource("3_wa13d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4147, 0.310352, -3.20793)
+script = ExtResource("4_ga483")
+
+[node name="Forest" type="Node3D" parent="."]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
+
+[node name="Trees" type="MeshInstance3D" parent="Forest"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.081, -2.161)
+material_override = SubResource("StandardMaterial3D_vr1eo")
+mesh = SubResource("PlaneMesh_h084n")
+skeleton = NodePath("../..")
+
+[node name="Trees2" type="MeshInstance3D" parent="Forest"]
+transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.081, 2.161)
+material_override = SubResource("StandardMaterial3D_vr1eo")
+mesh = SubResource("PlaneMesh_h084n")
+skeleton = NodePath("../..")
+
+[node name="Trees3" type="MeshInstance3D" parent="Forest"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.161, 1.081, 0)
+material_override = SubResource("StandardMaterial3D_vr1eo")
+mesh = SubResource("PlaneMesh_h084n")
+skeleton = NodePath("../..")
+
+[node name="Trees4" type="MeshInstance3D" parent="Forest"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.161, 1.081, 0)
+material_override = SubResource("StandardMaterial3D_vr1eo")
+mesh = SubResource("PlaneMesh_h084n")
+skeleton = NodePath("../..")
+
+[node name="Moon" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9828, 90.9801, -541.447)
+material_override = SubResource("StandardMaterial3D_6c6s6")
+cast_shadow = 0
+mesh = SubResource("SphereMesh_vr1eo")
+
+[node name="Stairs" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.56373)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.377, 0)
+mesh = SubResource("BoxMesh_caefr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairs/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_6c6s6")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.24939, 0.254295)
+mesh = SubResource("BoxMesh_caefr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairs/MeshInstance3D2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D2/StaticBody3D"]
+shape = SubResource("BoxShape3D_6c6s6")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.117702, 0.552594)
+mesh = SubResource("BoxMesh_caefr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairs/MeshInstance3D3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D3/StaticBody3D"]
+shape = SubResource("BoxShape3D_6c6s6")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0171376, 0.814952)
+mesh = SubResource("BoxMesh_caefr")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Stairs/MeshInstance3D4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D4/StaticBody3D"]
+shape = SubResource("BoxShape3D_6c6s6")
