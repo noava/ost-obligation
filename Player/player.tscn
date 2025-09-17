@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://vgsou12k4ck"]
+[gd_scene load_steps=6 format=3 uid="uid://vgsou12k4ck"]
 
 [ext_resource type="PackedScene" uid="uid://diuchan7aq7bs" path="res://Player/lil_mouse_guy.tscn" id="1_4ntmi"]
 [ext_resource type="Script" uid="uid://b6c1xou4tolnr" path="res://Player/Scripts/player_movement.gd" id="1_btcbx"]
 [ext_resource type="Script" uid="uid://3tixhkc3wumr" path="res://Player/Scripts/camera_pivot.gd" id="2_btcbx"]
+[ext_resource type="Script" uid="uid://cesgljdo1e2yh" path="res://Player/Scripts/player_holditem.gd" id="5_k53q1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 radius = 0.331061
@@ -29,3 +30,6 @@ spring_length = 5.0
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+
+[node name="HoldItem" type="Node3D" parent="."]
+script = ExtResource("5_k53q1")
