@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 @export var head: Node3D
 @export var player_model: Node3D
-var input_direction: Vector2
+var input_direction
 
 @export_category("Movement")
 @export_subgroup("Settings")
@@ -16,11 +16,16 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var speed = WALK_SPEED
 var acceleration = ACCELERATION
 
+# Step up
+@export var MAX_STEP_HEIGHT := 0.5
+@onready var step_ray: RayCast3D = $"LilMouseGuy/rig/Skeleton3D/Torso/SteppingRay"
+
 func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
 	move_player(delta)
+	step_up()
 	move_and_slide()
 
 func move_player(delta):
@@ -52,3 +57,10 @@ func move_player(delta):
 		speed = SPRINT_SPEED
 	else:
 		speed = WALK_SPEED
+
+func step_up():
+	if step_ray.is_colliding():
+		step_ray.force_raycast_update()
+		var step_height = step_ray.get_collision_point().y - global_transform.origin.y
+		if step_height > 0 and step_height < MAX_STEP_HEIGHT:
+			global_transform.origin.y += step_height
