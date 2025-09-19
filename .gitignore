@@ -3,7 +3,7 @@
 /android/
 *.tmp
 .vscode/
-
+.DS_Store
 
 # Blender backup files
 *.blend1
