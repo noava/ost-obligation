@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="2_148ls"]
 [ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
 [ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_ga483"]
-[ext_resource type="Texture2D" uid="uid://qu8reg5gggha" path="res://World/forest.png" id="6_6c6s6"]
+[ext_resource type="Texture2D" uid="uid://u0msqg4hf1bq" path="res://World/textures/forest.png" id="6_6c6s6"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
 energy_multiplier = 0.0
