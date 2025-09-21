@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://c104td6dkrner"]
+
+[ext_resource type="Script" uid="uid://b16xcg2suhbkd" path="res://Inventory/InvData/3d_inventory.gd" id="1_s44hi"]
+[ext_resource type="Texture2D" uid="uid://g1i7bolojsq0" path="res://Inventory/Picnic/textures/fabric_0003_color_1k.jpg" id="2_8nb0r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfqsx"]
+albedo_texture = ExtResource("2_8nb0r")
+
+[sub_resource type="BoxMesh" id="BoxMesh_pmw8h"]
+size = Vector3(2, 0.005, 2)
+
+[node name="picnic" type="Node3D"]
+script = ExtResource("1_s44hi")
+
+[node name="Towel" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_vfqsx")
+mesh = SubResource("BoxMesh_pmw8h")
+
+[node name="ItemGrid" type="Node3D" parent="."]

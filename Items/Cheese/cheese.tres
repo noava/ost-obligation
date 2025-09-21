@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bq1v2gmayluyh"]
+
+[ext_resource type="Script" uid="uid://bswlsb0sqs4r7" path="res://Inventory/InvData/item_data.gd" id="1_1utl1"]
+[ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_w2qki"]
+[ext_resource type="Texture2D" uid="uid://e4uf5tg51yuk" path="res://Items/Cheese/cheese.svg" id="3_dsm6w"]
+
+[resource]
+script = ExtResource("1_1utl1")
+name = "Cheese"
+description = "Delicious yellow treat that is very valuable"
+stackable = true
+texture = ExtResource("3_dsm6w")
+item_type = 3
+item_scene = ExtResource("1_w2qki")
+metadata/_custom_type_script = "uid://bswlsb0sqs4r7"

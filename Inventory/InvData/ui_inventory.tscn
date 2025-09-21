@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://djq1guxr8cbbr"]
+
+[ext_resource type="Script" uid="uid://ccx3rctqpt6yy" path="res://Inventory/InvData/ui_inventory.gd" id="1_j268s"]
+[ext_resource type="PackedScene" uid="uid://op1yg1g3a4qt" path="res://Inventory/InvData/Slot/ui_slot.tscn" id="1_vllth"]
+
+[node name="UiInventory" type="PanelContainer"]
+offset_right = 216.0
+offset_bottom = 80.0
+script = ExtResource("1_j268s")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="ItemGrid" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+columns = 3
+
+[node name="UiSlot" parent="MarginContainer/ItemGrid" instance=ExtResource("1_vllth")]
+layout_mode = 2
+
+[node name="UiSlot2" parent="MarginContainer/ItemGrid" instance=ExtResource("1_vllth")]
+layout_mode = 2
+
+[node name="UiSlot3" parent="MarginContainer/ItemGrid" instance=ExtResource("1_vllth")]
+layout_mode = 2

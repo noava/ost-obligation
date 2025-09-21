@@ -1,0 +1,55 @@
+[gd_resource type="Resource" script_class="InventoryData" load_steps=13 format=3 uid="uid://go60t57o28wu"]
+
+[ext_resource type="Script" uid="uid://bdm6y0n1x3gg" path="res://Inventory/InvData/inv_data.gd" id="1_so7jr"]
+[ext_resource type="Script" uid="uid://btl2o4asmkf16" path="res://Inventory/InvData/Slot/slot_data.gd" id="2_dvdfv"]
+[ext_resource type="Resource" uid="uid://qdmv71eispfw" path="res://Items/Candle/candle.tres" id="3_dvdfv"]
+[ext_resource type="Resource" uid="uid://bq1v2gmayluyh" path="res://Items/Cheese/cheese.tres" id="4_s382f"]
+
+[sub_resource type="Resource" id="Resource_s382f"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("3_dvdfv")
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_7m8jd"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("4_s382f")
+quantity = 256
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_4gg4q"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("3_dvdfv")
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_urbhy"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("4_s382f")
+quantity = 14
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_dauh6"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("4_s382f")
+quantity = 4
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_dvdfv"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("4_s382f")
+quantity = 48
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_soga3"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("3_dvdfv")
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[sub_resource type="Resource" id="Resource_i8mgp"]
+script = ExtResource("2_dvdfv")
+item_data = ExtResource("3_dvdfv")
+metadata/_custom_type_script = "uid://btl2o4asmkf16"
+
+[resource]
+script = ExtResource("1_so7jr")
+slot_datas = Array[ExtResource("2_dvdfv")]([SubResource("Resource_s382f"), SubResource("Resource_7m8jd"), SubResource("Resource_4gg4q"), SubResource("Resource_urbhy"), SubResource("Resource_dauh6"), SubResource("Resource_dvdfv"), SubResource("Resource_7m8jd"), SubResource("Resource_soga3"), SubResource("Resource_i8mgp"), null, null, null])
+metadata/_custom_type_script = "uid://bdm6y0n1x3gg"

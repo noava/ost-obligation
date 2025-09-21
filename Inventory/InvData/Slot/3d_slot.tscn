@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://bm8x8wasndstr"]
+
+[ext_resource type="Script" uid="uid://b437io2d2nvo6" path="res://Inventory/InvData/Slot/3d_slot.gd" id="1_tvd2t"]
+
+[node name="Slot" type="Node3D"]
+script = ExtResource("1_tvd2t")
+
+[node name="ItemScene" type="Node3D" parent="."]
+transform = Transform3D(0.74812245, 0, -0.6635607, 0, 1, 0, 0.6635607, 0, 0.74812245, 0, 0, 0)
+
+[node name="Name" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42459983, 0)
+visible = false
+billboard = 2
+text = "test_name"
+font_size = 24
+
+[node name="Amount" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.285, 0)
+visible = false
+billboard = 2
+text = "x256"
+font_size = 16
