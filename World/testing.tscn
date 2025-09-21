@@ -40,6 +40,7 @@ data = PackedVector3Array(250, 0, 250, -250, 0, 250, 250, 0, -250, -250, 0, 250,
 transparency = 2
 alpha_scissor_threshold = 0.5
 alpha_antialiasing_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 albedo_texture = ExtResource("6_6c6s6")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h084n"]
@@ -84,6 +85,7 @@ mesh = SubResource("PlaneMesh_wa13d")
 shape = SubResource("ConcavePolygonShape3D_6c6s6")
 
 [node name="Cheesus" type="Node3D" parent="."]
+script = ExtResource("4_ga483")
 
 [node name="Cheese" parent="Cheesus" instance=ExtResource("1_ffbi0")]
 transform = Transform3D(0.743378, 0, -0.668871, 0, 1, 0, 0.668871, 0, 0.743378, -5.27767, 2.49437, 4.70203)
