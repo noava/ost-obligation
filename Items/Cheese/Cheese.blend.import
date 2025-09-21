@@ -50,13 +50,7 @@ _subresources={
 }
 },
 "nodes": {
-"PATH:Camera": {
-"import/skip_import": true
-},
 "PATH:CheeseHoles": {
-"import/skip_import": true
-},
-"PATH:Light": {
 "import/skip_import": true
 }
 }

@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg2ug0nb4ywru"]
+
+[ext_resource type="Texture2D" uid="uid://g1i7bolojsq0" path="res://Inventory/Picnic/textures/fabric_0003_color_1k.jpg" id="1_3erku"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ac5eg"]
+albedo_color = Color(0.32437995, 0.22385085, 0.09564517, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_s03pk"]
+top_radius = 0.01
+bottom_radius = 0.03
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fg3bt"]
+albedo_texture = ExtResource("1_3erku")
+uv1_scale = Vector3(0.26, 0.26, 0.26)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hgmrm"]
+material = SubResource("StandardMaterial3D_fg3bt")
+radius = 0.3
+height = 0.8
+
+[node name="Bindle" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7182858, 0)
+material_override = SubResource("StandardMaterial3D_ac5eg")
+mesh = SubResource("CylinderMesh_s03pk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -6.9849193e-10, 1.3894154, 0.2829916)
+mesh = SubResource("SphereMesh_hgmrm")

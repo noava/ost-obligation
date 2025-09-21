@@ -3,6 +3,7 @@ extends CharacterBody3D
 @export var head: Node3D
 @export var player_model: Node3D
 var input_direction
+@export var inventory_data: InventoryData
 
 @export_category("Movement")
 @export_subgroup("Settings")
