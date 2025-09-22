@@ -1,0 +1,117 @@
+[gd_scene load_steps=13 format=3 uid="uid://b68lsu0qw4i7u"]
+
+[ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="1_e1xpn"]
+[ext_resource type="Script" uid="uid://bgc6hnp0k1g05" path="res://Menu/Scripts/main_menu.gd" id="1_swd6r"]
+[ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_tpenk"]
+[ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_exbqw"]
+[ext_resource type="Script" uid="uid://5mk3jop28g0f" path="res://Menu/Scripts/menu_buttons.gd" id="5_exbqw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_exbqw"]
+sky_top_color = Color(0.28937602, 0.3493722, 0.42932323, 1)
+sky_horizon_color = Color(0.5517851, 0.5590341, 0.57002187, 1)
+ground_horizon_color = Color(0.5517851, 0.5590341, 0.57002187, 1)
+energy_multiplier = 0.1
+
+[sub_resource type="Sky" id="Sky_biqin"]
+sky_material = SubResource("ProceduralSkyMaterial_exbqw")
+
+[sub_resource type="Environment" id="Environment_um3lu"]
+background_mode = 2
+sky = SubResource("Sky_biqin")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_anisotropy = 0.15
+volumetric_fog_length = 19.96
+volumetric_fog_detail_spread = 1.3195081
+
+[sub_resource type="FogMaterial" id="FogMaterial_exbqw"]
+density = 1.0314
+height_falloff = 1e-05
+edge_fade = 0.3732127
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eoq7w"]
+albedo_color = Color(0.0809816, 0.181853, 0.181858, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_e1xpn"]
+size = Vector2(500, 500)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_swd6r"]
+data = PackedVector3Array(250, 0, 250, -250, 0, 250, 250, 0, -250, -250, 0, 250, -250, 0, -250, 250, 0, -250)
+
+[node name="MainMenu" type="Node3D"]
+script = ExtResource("1_swd6r")
+
+[node name="fixthis" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_um3lu")
+
+[node name="FogVolume" type="FogVolume" parent="fixthis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70765877, 1.8032045, -8.910348)
+size = Vector3(44.322117, 6.7490234, 3.479889)
+material = SubResource("FogMaterial_exbqw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.9697571, 0.24407211, 0, -0.24407211, 0.9697571, -0.96778, 1.2055404, 1.9379646)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.225, 0, 0, 0, 0.225, 0, 0, 0, 0.225, -0.00013875961, 0.02347231, -0.018977165)
+material_override = SubResource("StandardMaterial3D_eoq7w")
+mesh = SubResource("PlaneMesh_e1xpn")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_swd6r")
+
+[node name="Player" parent="." instance=ExtResource("1_e1xpn")]
+
+[node name="Candle" parent="." instance=ExtResource("3_tpenk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0027469695, 1.3903146, 1.9357684)
+script = ExtResource("4_exbqw")
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 300.0
+offset_top = -20.0
+offset_right = 339.99994
+offset_bottom = 20.0
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -151.67001
+offset_top = -181.0625
+offset_right = 151.67001
+offset_bottom = 181.0625
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 40
+script = ExtResource("5_exbqw")
+
+[node name="Start" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Start"
+
+[node name="Multiplayer" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Multiplayer"
+
+[node name="Exit" type="Button" parent="Menu/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Host"
+
+[connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu/VBoxContainer" method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Multiplayer" to="Menu/VBoxContainer" method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Exit" to="Menu/VBoxContainer" method="_on_exit_pressed"]

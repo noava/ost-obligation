@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="MouseGame"
-run/main_scene="uid://dicdkiket4dqb"
+run/main_scene="uid://b68lsu0qw4i7u"
 config/features=PackedStringArray("4.5", "Forward Plus")
+
+[autoload]
+
+State="*res://Steam/globals/state.gd"
+p2p="*res://Steam/globals/p2p.gd"
+SteamManager="*res://Steam/globals/steamManager.gd"
 
 [editor_plugins]
 

@@ -1,4 +1,7 @@
 extends CharacterBody3D
+@onready var ui: CanvasLayer = $UI
+@onready var camera_3d: Camera3D = $CameraPivot/SpringArm3D/Camera3D
+var stationary := false
 
 @export var head: Node3D
 @export var player_model: Node3D
@@ -25,6 +28,8 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if stationary:
+		return
 	move_player(delta)
 	step_up()
 	move_and_slide()
@@ -65,3 +70,13 @@ func step_up():
 		var step_height = step_ray.get_collision_point().y - global_transform.origin.y
 		if step_height > 0 and step_height < MAX_STEP_HEIGHT:
 			global_transform.origin.y += step_height
+
+# for the main menu just to make the player non movable and hide ui and other stuff
+func make_playable(is_playable: bool): 
+	stationary = !is_playable
+	if is_playable:
+		ui.show()
+		camera_3d.show()
+	else:
+		ui.hide()
+		camera_3d.hide()

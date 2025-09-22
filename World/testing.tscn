@@ -99,9 +99,6 @@ transform = Transform3D(0.59325, 0, 0.805018, 0, 1, 0, -0.805018, 0, 0.59325, -2
 [node name="Cheese4" parent="Cheesus" instance=ExtResource("1_ffbi0")]
 transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 2.41622, 2.34316, 4.69852)
 
-[node name="Player" parent="." instance=ExtResource("2_148ls")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 3.52296)
-
 [node name="Candles" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.14113, 2.62034, 7.7726)
 
@@ -188,3 +185,8 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c6s6")
+
+[node name="Players" type="Node" parent="."]
+
+[node name="Player" parent="Players" instance=ExtResource("2_148ls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 3.52296)
