@@ -9,6 +9,7 @@ extends Node3D
 @export var min_length: float = 1.0
 @export var max_length: float = 10.0
 var target_length: float = 3.0
+@onready var player: CharacterBody3D = $".."
 
 var mouse_lock = false
 
@@ -23,6 +24,9 @@ func _physics_process(_delta):
 		global_position = lerp(global_position, target_node.global_position,0.5)
 
 func _input(event):
+	if player.stationary:
+		return
+		
 	# lock mouse
 	if Input.is_action_just_pressed("exit_camera"):
 		mouse_lock = false
