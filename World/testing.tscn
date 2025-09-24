@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dicdkiket4dqb"]
+[gd_scene load_steps=22 format=3 uid="uid://dicdkiket4dqb"]
 
 [ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_ffbi0"]
 [ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="2_148ls"]
 [ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
 [ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_ga483"]
 [ext_resource type="Texture2D" uid="uid://u0msqg4hf1bq" path="res://World/textures/forest.png" id="6_6c6s6"]
+[ext_resource type="Shader" uid="uid://dxxb4ytlltj0j" path="res://World/explosion_cloud.tres" id="6_vr1eo"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
 energy_multiplier = 0.0
@@ -62,12 +63,25 @@ material = SubResource("StandardMaterial3D_caefr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6c6s6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h084n"]
+render_priority = 0
+shader = ExtResource("6_vr1eo")
+shader_parameter/Cloud_speed = Vector2(0, 0.7)
+shader_parameter/Cloud_intensity = 0.2
+shader_parameter/Explosion_color = Color(0.711945, 0.320008, 1e-06, 1)
+shader_parameter/FloatParameter = 20.0
+shader_parameter/Explosion_amount = 0.09600000456
+
+[sub_resource type="SphereMesh" id="SphereMesh_la5cf"]
+
 [node name="Testing" type="Node3D"]
 
 [node name="Environment" type="Node3D" parent="."]
+visible = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment"]
 transform = Transform3D(1, 0, 0, 0, -0.984808, 0.173648, 0, -0.173648, -0.984808, 0, 0, 0)
+visible = false
 light_color = Color(0, 0.275867, 0.278795, 1)
 shadow_enabled = true
 directional_shadow_max_distance = 200.0
@@ -76,6 +90,7 @@ directional_shadow_max_distance = 200.0
 environment = SubResource("Environment_ffbi0")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
+visible = false
 material_override = SubResource("StandardMaterial3D_148ls")
 mesh = SubResource("PlaneMesh_wa13d")
 
@@ -85,6 +100,7 @@ mesh = SubResource("PlaneMesh_wa13d")
 shape = SubResource("ConcavePolygonShape3D_6c6s6")
 
 [node name="Cheesus" type="Node3D" parent="."]
+visible = false
 script = ExtResource("4_ga483")
 
 [node name="Cheese" parent="Cheesus" instance=ExtResource("1_ffbi0")]
@@ -101,9 +117,11 @@ transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 
 
 [node name="Player" parent="." instance=ExtResource("2_148ls")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 3.52296)
+visible = false
 
 [node name="Candles" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.14113, 2.62034, 7.7726)
+visible = false
 
 [node name="Candle" parent="Candles" instance=ExtResource("3_wa13d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.329277, 0)
@@ -115,39 +133,46 @@ script = ExtResource("4_ga483")
 
 [node name="Forest" type="Node3D" parent="."]
 transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
+visible = false
 
 [node name="Trees" type="MeshInstance3D" parent="Forest"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.081, -2.161)
+visible = false
 material_override = SubResource("StandardMaterial3D_vr1eo")
 mesh = SubResource("PlaneMesh_h084n")
 skeleton = NodePath("../..")
 
 [node name="Trees2" type="MeshInstance3D" parent="Forest"]
 transform = Transform3D(-1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 0, 1.081, 2.161)
+visible = false
 material_override = SubResource("StandardMaterial3D_vr1eo")
 mesh = SubResource("PlaneMesh_h084n")
 skeleton = NodePath("../..")
 
 [node name="Trees3" type="MeshInstance3D" parent="Forest"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.161, 1.081, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_vr1eo")
 mesh = SubResource("PlaneMesh_h084n")
 skeleton = NodePath("../..")
 
 [node name="Trees4" type="MeshInstance3D" parent="Forest"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2.161, 1.081, 0)
+visible = false
 material_override = SubResource("StandardMaterial3D_vr1eo")
 mesh = SubResource("PlaneMesh_h084n")
 skeleton = NodePath("../..")
 
 [node name="Moon" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.9828, 90.9801, -541.447)
+visible = false
 material_override = SubResource("StandardMaterial3D_6c6s6")
 cast_shadow = 0
 mesh = SubResource("SphereMesh_vr1eo")
 
 [node name="Stairs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.56373)
+visible = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Stairs"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.377, 0)
@@ -188,3 +213,10 @@ skeleton = NodePath("../..")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c6s6")
+
+[node name="Explosion" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Explosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.137228, 5.583487, 0.0038392842)
+material_override = SubResource("ShaderMaterial_h084n")
+mesh = SubResource("SphereMesh_la5cf")
