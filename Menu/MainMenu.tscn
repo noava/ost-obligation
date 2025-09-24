@@ -20,7 +20,6 @@ background_mode = 2
 sky = SubResource("Sky_biqin")
 tonemap_mode = 2
 glow_enabled = true
-volumetric_fog_enabled = true
 volumetric_fog_anisotropy = 0.15
 volumetric_fog_length = 19.96
 volumetric_fog_detail_spread = 1.3195081
@@ -47,6 +46,7 @@ environment = SubResource("Environment_um3lu")
 
 [node name="FogVolume" type="FogVolume" parent="fixthis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.70765877, 1.8032045, -8.910348)
+visible = false
 size = Vector3(44.322117, 6.7490234, 3.479889)
 material = SubResource("FogMaterial_exbqw")
 
@@ -66,7 +66,7 @@ shape = SubResource("ConcavePolygonShape3D_swd6r")
 [node name="Player" parent="." instance=ExtResource("1_e1xpn")]
 
 [node name="Candle" parent="." instance=ExtResource("3_tpenk")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0027469695, 1.3903146, 1.9357684)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0027469695, 1.3903146, 1.6965969)
 script = ExtResource("4_exbqw")
 
 [node name="Menu" type="Control" parent="."]
@@ -80,6 +80,8 @@ offset_right = 339.99994
 offset_bottom = 20.0
 grow_vertical = 2
 size_flags_horizontal = 4
+script = ExtResource("5_exbqw")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menu"]
 layout_mode = 1
@@ -95,7 +97,6 @@ offset_bottom = 181.0625
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 40
-script = ExtResource("5_exbqw")
 
 [node name="Start" type="Button" parent="Menu/VBoxContainer"]
 layout_mode = 2
@@ -112,6 +113,6 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "Host"
 
-[connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu/VBoxContainer" method="_on_start_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Multiplayer" to="Menu/VBoxContainer" method="_on_multiplayer_pressed"]
-[connection signal="pressed" from="Menu/VBoxContainer/Exit" to="Menu/VBoxContainer" method="_on_exit_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Start" to="Menu" method="_on_start_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Multiplayer" to="Menu" method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/Exit" to="Menu" method="_on_exit_pressed"]

@@ -105,9 +105,10 @@ func search_available_lobbies():
 
 func send_chat_message(_message):
 	var lobby_id = State.lobby_data.id
+	var username = State.user_data.steam_username
 	Steam.sendLobbyChatMsg(lobby_id, _message)
 	# call the signal for normal message here too so the local ui see the message instantly
-	notify_handlers("on_chat_message", _message)	
+	notify_handlers("on_chat_message", username, _message)
 
 func get_lobby_members(_lobby_id: int = -1):
 	if _lobby_id == -1:

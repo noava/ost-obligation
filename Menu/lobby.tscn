@@ -1,28 +1,66 @@
 [gd_scene load_steps=2 format=3 uid="uid://ba6m63vr3xhqn"]
 
-[ext_resource type="Script" uid="uid://c26plrptvpp20" path="res://Menu/lobbyManager.gd" id="1_cn352"]
+[ext_resource type="Script" uid="uid://c26plrptvpp20" path="res://Menu/Scripts/lobby_manager.gd" id="1_cn352"]
 
 [node name="Lobby" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cn352")
 
+[node name="buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -473.0
+offset_top = -180.0
+offset_right = -211.0
+offset_bottom = 177.0
+grow_vertical = 2
+theme_override_constants/separation = 40
+
+[node name="Browse" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Browse"
+
+[node name="Host" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Host"
+
+[node name="Back" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Back"
+
 [node name="InLobby" type="Control" parent="."]
 visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Players" type="Panel" parent="InLobby"]
 layout_mode = 0
-offset_left = 901.0
-offset_top = 125.0
-offset_right = 1113.0
-offset_bottom = 548.0
+offset_left = 371.0
+offset_top = -178.0
+offset_right = 583.0
+offset_bottom = 245.0
 
 [node name="PlayersTitle" type="Label" parent="InLobby/Players"]
 layout_mode = 0
@@ -41,10 +79,10 @@ offset_bottom = 409.0
 
 [node name="Message" type="Panel" parent="InLobby"]
 layout_mode = 0
-offset_left = 224.0
-offset_top = 571.0
-offset_right = 862.0
-offset_bottom = 627.0
+offset_left = -289.0
+offset_top = 262.0
+offset_right = 349.0
+offset_bottom = 318.0
 
 [node name="MessageBox" type="TextEdit" parent="InLobby/Message"]
 layout_mode = 0
@@ -54,28 +92,12 @@ offset_right = 628.0
 offset_bottom = 48.0
 placeholder_text = "Type a message here...."
 
-[node name="Leave" type="Button" parent="InLobby"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 22.0
-offset_right = 191.0
-offset_bottom = 81.0
-text = "Leave lobby"
-
-[node name="Start" type="Button" parent="InLobby"]
-layout_mode = 0
-offset_left = 18.0
-offset_top = 569.0
-offset_right = 191.0
-offset_bottom = 628.0
-text = "Start game"
-
 [node name="Chat" type="Panel" parent="InLobby"]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 125.0
-offset_right = 861.0
-offset_bottom = 549.0
+offset_left = -289.0
+offset_top = -179.0
+offset_right = 349.0
+offset_bottom = 245.0
 
 [node name="LobbyTitle" type="Label" parent="InLobby/Chat"]
 layout_mode = 0
@@ -93,29 +115,25 @@ offset_right = 627.0
 offset_bottom = 413.0
 scroll_following = true
 
-[node name="Browse" type="Button" parent="."]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 170.0
-offset_right = 188.0
-offset_bottom = 229.0
-text = "Browse"
+[node name="Leave" type="Button" parent="InLobby"]
+layout_mode = 1
+offset_left = -541.0
+offset_top = -293.0
+offset_right = -360.0
+offset_bottom = -225.0
+text = "Leave lobby"
 
-[node name="Host" type="Button" parent="."]
-layout_mode = 0
-offset_left = 14.0
-offset_top = 96.0
-offset_right = 187.0
-offset_bottom = 155.0
-text = "Host"
-
-[node name="Back" type="Button" parent="."]
-layout_mode = 0
-offset_left = 15.0
-offset_top = 22.0
-offset_right = 188.0
-offset_bottom = 81.0
-text = "Back"
+[node name="Start" type="Button" parent="InLobby"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -540.0
+offset_top = 214.0
+offset_right = -359.0
+offset_bottom = 282.0003
+grow_vertical = 0
+text = "Start game"
 
 [node name="PopupPanel" type="PopupPanel" parent="."]
 oversampling_override = 1.0
@@ -156,10 +174,10 @@ offset_bottom = 475.0
 text = "Close
 "
 
+[connection signal="pressed" from="buttons/Browse" to="." method="_on_browse_pressed"]
+[connection signal="pressed" from="buttons/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="buttons/Back" to="." method="_on_back_pressed"]
 [connection signal="gui_input" from="InLobby/Message/MessageBox" to="." method="_on_message_box_gui_input"]
 [connection signal="pressed" from="InLobby/Leave" to="." method="_on_leave_pressed"]
 [connection signal="pressed" from="InLobby/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="Browse" to="." method="_on_browse_pressed"]
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]
 [connection signal="pressed" from="PopupPanel/Lobbies/Close" to="." method="_on_close_pressed"]

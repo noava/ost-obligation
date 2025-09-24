@@ -63,13 +63,14 @@ func _player_connected(_id):
 ###################
 @rpc("call_local", "reliable")
 func load_game_scene(_scene: String):
-	print("ok loading")
+	if State.menu_scene == "":
+		print("set the lobby scene")
 	# note:
 	# using the normal get_tree().change_scene() just fucks up the whole multiplayerspawner/multiplayersynchronizer connection
 	# manually adding the world node and hiding the lobby ui fixed it... (or maybe the load + instantiate this early?)
 	var game = load(_scene).instantiate()
 	get_tree().get_root().add_child(game)
-	get_tree().get_root().get_node("Lobby").hide() #ALERT: ADD LOBBY ROOT NODE IDENTIFIER HERE <- 
+	get_tree().get_root().get_node(State.menu_scene).queue_free()
 
 @rpc("any_peer")
 func register_peer(_steam_id: int):

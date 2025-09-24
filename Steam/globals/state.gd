@@ -1,11 +1,13 @@
 extends Node
 #https://godotsteam.com/tutorials/initializing/
 
+
 var single_player: bool = true
 var user_data: Dictionary = {
 	"steam_id" : 0,
 	"steam_username": ""
 }
+
 var lobby_data: Dictionary = {
 	"owner_id": 0,
 	"id": 0,
@@ -15,5 +17,7 @@ var lobby_data: Dictionary = {
 	"lobby_size": 10
 }
 
-var game_scene: String = "res://world/game.tscn"
-var lobby_scene: String = "res://steam/ui/lobby.tscn"
+
+# must be set in code or else 😡😡😡😡
+var game_scene: String = ""
+var menu_scene: String = ""
