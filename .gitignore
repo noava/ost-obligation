@@ -10,3 +10,7 @@
 
 # GitHub files
 .github/
+
+# Build files
+build/
+Build/

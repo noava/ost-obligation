@@ -23,10 +23,23 @@ var acceleration = ACCELERATION
 @export var MAX_STEP_HEIGHT := 0.5
 @onready var step_ray: RayCast3D = $"LilMouseGuy/rig/Skeleton3D/Torso/SteppingRay"
 
+func _ready() -> void:
+	if State.single_player:
+		return
+
+	var name_str = str(name)
+	print("name " + name_str)
+	if name_str.is_valid_int():
+		set_multiplayer_authority(name_str.to_int(), true)
+		# get_node("MultiplayerSynchronizer").set_multiplayer_authority(name_str.to_int())
+
 func _physics_process(delta: float) -> void:
 	if stationary:
 		return
-	move_player(delta)
+		
+	if State.single_player || str(multiplayer.get_unique_id()) == str(name):
+		move_player(delta)
+	
 	step_up()
 	move_and_slide()
 

@@ -1,21 +1,20 @@
 extends SteamHandler
 
-@onready var lobbiesbox = $PopupPanel/Lobbies/Scroll/LobbiesBox
-@onready var lobbiestitle = $PopupPanel/Lobbies/LobbiesTitle
-@onready var playerstitle = $InLobby/Players/PlayersTitle
-@onready var messagebox = $InLobby/Message/MessageBox
-@onready var playersbox = $InLobby/Players/PlayersBox
-@onready var lobbytitle = $InLobby/Chat/LobbyTitle
-@onready var chatbox = $InLobby/Chat/ChatBox
-@onready var leave = $InLobby/Leave
-@onready var start = $InLobby/Start
-@onready var popup = $PopupPanel
-@onready var inlobby = $InLobby
-@onready var browse = $Browse
-@onready var host = $Host
-@onready var back = $Back
+@onready var lobbiesbox: VBoxContainer = $PopupPanel/Lobbies/Scroll/LobbiesBox
+@onready var lobbiestitle: Label = $PopupPanel/Lobbies/LobbiesTitle
+@onready var playerstitle: Label = $InLobby/Players/PlayersTitle
+@onready var messagebox: TextEdit = $InLobby/Message/MessageBox
+@onready var playersbox: RichTextLabel = $InLobby/Players/PlayersBox
+@onready var lobbytitle: Label = $PopupPanel/Lobbies/LobbiesTitle
+@onready var chatbox: RichTextLabel = $InLobby/Chat/ChatBox
+@onready var leave: Button = $InLobby/Leave
+@onready var start: Button = $InLobby/Start
+@onready var popup: PopupPanel = $PopupPanel
+@onready var inlobby: Control = $InLobby
+@onready var buttons: VBoxContainer = $buttons
 
 func _ready() -> void:
+	State.game_scene = "res://World/testing.tscn"
 	SteamManager.register_handler(self)
 
 	# if the player accepted an invite
@@ -24,29 +23,23 @@ func _ready() -> void:
 		populate_player_list()
 
 
+func _exit_tree() -> void:
+	SteamManager.unregister_handler(self)
+
+
 ###################################################
 ##################### HELPERS #####################
 ###################################################
-func reset_lobby():
-	playersbox.clear()
-	playerstitle.text = "Players: (1)"
-	chatbox.clear()
-	messagebox.clear()
-
 func hide_lobby():
 	chatbox.clear()
-	host.show()
 	inlobby.hide()
-	browse.show()
-	back.show()
+	buttons.show()
 	leave.hide()
 	start.hide()
 
 func show_lobby():
 	inlobby.show()
-	host.hide()
-	browse.hide()
-	back.hide()
+	buttons.hide()
 	leave.show()
 	start.show()
 
@@ -63,7 +56,9 @@ func populate_player_list():
 ##################### INTERACTION #####################
 #######################################################
 func _on_back_pressed():
-	get_tree().change_scene_to_file("res://main.tscn")
+	var menu = get_parent().get_node("Menu")
+	menu.show()
+	queue_free()
 
 func _on_host_pressed():
 	show_lobby()
@@ -94,14 +89,13 @@ func _on_start_pressed():
 ## these are for the browse popup
 func _on_close_pressed():
 	popup.hide()
-	pass # Replace with function body.
 
 
 #####################################################
 ##################### ABSTRACTS #####################
 #####################################################
 
-func on_chat_message(_sender, _message):
+func on_chat_message(_sender: String, _message: String):
 	chatbox.append_text(_sender + ": " + _message + "\n")
 
 func on_system_message(_message):
@@ -118,6 +112,7 @@ func on_lobby_joined(_lobby_id, _name):
 	start.hide()
 	chatbox.append_text("joined lobby: " + str(_lobby_id) + "\n")
 	lobbytitle.text = _name
+	populate_player_list()
 
 func on_lobbies_found(_lobbies):
 	for n in lobbiesbox.get_children():
