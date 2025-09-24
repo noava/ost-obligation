@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=3 uid="uid://dicdkiket4dqb"]
+[gd_scene load_steps=37 format=3 uid="uid://dicdkiket4dqb"]
 
 [ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_ffbi0"]
 [ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="2_148ls"]
 [ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
 [ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_ga483"]
 [ext_resource type="Texture2D" uid="uid://u0msqg4hf1bq" path="res://World/textures/forest.png" id="6_6c6s6"]
-[ext_resource type="Shader" uid="uid://dxxb4ytlltj0j" path="res://World/explosion_cloud.tres" id="6_vr1eo"]
+[ext_resource type="Material" uid="uid://en2icsby56wf" path="res://World/m_explosive_cloud.tres" id="6_vr1eo"]
+[ext_resource type="Shader" uid="uid://dd1m7vl323w0" path="res://World/streaks.tres" id="7_vr1eo"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
 energy_multiplier = 0.0
@@ -63,16 +64,79 @@ material = SubResource("StandardMaterial3D_caefr")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6c6s6"]
 
+[sub_resource type="SphereMesh" id="SphereMesh_la5cf"]
+
+[sub_resource type="Curve" id="Curve_h084n"]
+_data = [Vector2(0.48799998, 0), 0.0, 0.0, 0, 0, Vector2(0.8759999, 1), 4.207344, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_la5cf"]
+texture_mode = 1
+curve = SubResource("Curve_h084n")
+
+[sub_resource type="Gradient" id="Gradient_3i21j"]
+offsets = PackedFloat32Array(0.29464287, 0.5625)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8s25l"]
+gradient = SubResource("Gradient_3i21j")
+
+[sub_resource type="Curve" id="Curve_gd5i3"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.32799995, 0.31578946), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_mem8s"]
+curve = SubResource("Curve_gd5i3")
+
+[sub_resource type="Curve" id="Curve_frd5u"]
+_data = [Vector2(0, 0.27164686), 0.0, 2.5290034, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3eqs7"]
+curve = SubResource("Curve_frd5u")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t21nv"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+radial_velocity_min = 6.4999776
+radial_velocity_max = 7.4999776
+radial_velocity_curve = SubResource("CurveTexture_mem8s")
+gravity = Vector3(0, 0, 0)
+scale_min = 1.6999999
+scale_max = 1.8
+scale_curve = SubResource("CurveTexture_3eqs7")
+color_ramp = SubResource("GradientTexture1D_8s25l")
+alpha_curve = SubResource("CurveTexture_la5cf")
+
+[sub_resource type="SphereMesh" id="SphereMesh_6nvrk"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_h084n"]
 render_priority = 0
-shader = ExtResource("6_vr1eo")
-shader_parameter/Cloud_speed = Vector2(0, 0.7)
-shader_parameter/Cloud_intensity = 0.2
-shader_parameter/Explosion_color = Color(0.711945, 0.320008, 1e-06, 1)
-shader_parameter/FloatParameter = 20.0
-shader_parameter/Explosion_amount = 0.09600000456
+shader = ExtResource("7_vr1eo")
+shader_parameter/Streaks_color = Color(1.8247963, 1.6578984, 0.9063318, 1)
 
-[sub_resource type="SphereMesh" id="SphereMesh_la5cf"]
+[sub_resource type="Curve" id="Curve_la5cf"]
+_data = [Vector2(0, 0.43718165), 0.0, 2.2572923, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_3i21j"]
+curve = SubResource("Curve_la5cf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8s25l"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 90.0
+initial_velocity_min = 0.5
+initial_velocity_max = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 7.0
+scale_curve = SubResource("CurveTexture_3i21j")
+hue_variation_min = -1.0
+hue_variation_max = 0.99999994
+
+[sub_resource type="QuadMesh" id="QuadMesh_gd5i3"]
+size = Vector2(0.25, 1)
+center_offset = Vector3(0, 0.4, 0)
 
 [node name="Testing" type="Node3D"]
 
@@ -218,5 +282,26 @@ shape = SubResource("BoxShape3D_6c6s6")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Explosion"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.137228, 5.583487, 0.0038392842)
-material_override = SubResource("ShaderMaterial_h084n")
+visible = false
+material_override = ExtResource("6_vr1eo")
 mesh = SubResource("SphereMesh_la5cf")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Explosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.663536, 1.4156332, 0)
+visible = false
+material_override = ExtResource("6_vr1eo")
+lifetime = 0.6
+explosiveness = 0.8
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_t21nv")
+draw_pass_1 = SubResource("SphereMesh_6nvrk")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="Explosion"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5209744, 0)
+material_override = SubResource("ShaderMaterial_h084n")
+lifetime = 0.4
+explosiveness = 0.9
+randomness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_8s25l")
+draw_pass_1 = SubResource("QuadMesh_gd5i3")
