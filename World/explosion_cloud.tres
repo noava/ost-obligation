@@ -23,11 +23,11 @@ texture = SubResource("NoiseTexture2D_73o0u")
 texture_type = 1
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_yuh3o"]
-size = Vector2(584, 437)
+size = Vector2(584.0001, 437.00006)
 attached_nodes = PackedInt32Array(2, 3)
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_r2vxh"]
-size = Vector2(904.0002, 1257)
+size = Vector2(904.0002, 1257.0005)
 attached_nodes = PackedInt32Array(8, 5, 4, 6, 11, 9, 19)
 
 [sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_73o0u"]
@@ -40,7 +40,7 @@ texture_type = 1
 linked_parent_graph_frame = 17
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_3gium"]
-size = Vector2(1384, 566)
+size = Vector2(1384.0002, 566.00006)
 attached_nodes = PackedInt32Array(14, 15, 18, 20, 21)
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_rq8p0"]
