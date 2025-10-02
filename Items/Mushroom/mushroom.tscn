@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvrmvbt67x8gd"]
+
+[ext_resource type="PackedScene" uid="uid://cwmeqnh4fdce7" path="res://Items/Mushroom/Mushroom.blend" id="1_l6vnn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l6vnn"]
+albedo_color = Color(0.36967906, 0.26848173, 0.09922133, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4wtdk"]
+size = Vector3(0.76782227, 0.5033188, 0.8203125)
+
+[node name="Mushroom" instance=ExtResource("1_l6vnn")]
+
+[node name="Cylinder" parent="." index="0"]
+transform = Transform3D(0.38251445, 0, 0, 0, 0.38251445, 0, 0, 0, 0.38251445, 0, 0.48349452, 0)
+material_override = SubResource("StandardMaterial3D_l6vnn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5248754, 0)
+shape = SubResource("BoxShape3D_4wtdk")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
