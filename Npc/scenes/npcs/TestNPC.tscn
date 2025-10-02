@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://delqehyij7xqp"]
+
+[ext_resource type="Script" uid="uid://btvxiwrlh0odg" path="res://Npc/scripts/SimpleNPC.gd" id="1_xsc3t"]
+[ext_resource type="JSON" path="res://Npc/dialogue/test_npc.json" id="2_ns87x"]
+[ext_resource type="AudioStream" uid="uid://c0xx04822k6my" path="res://Npc/audio/voice_lines/test.wav" id="3_gr3uk"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_xw01i"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_xsc3t"]
+
+[node name="TestNpc" type="CharacterBody3D"]
+script = ExtResource("1_xsc3t")
+dialogue_id = "intro"
+dialogue_json_file = ExtResource("2_ns87x")
+voice_lines = Array[AudioStream]([ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk")])
+include_random_voice_lines = true
+random_voice_lines = Array[AudioStream]([ExtResource("3_gr3uk")])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_xw01i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_xsc3t")

@@ -17,6 +17,9 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 [display]
 
 window/stretch/mode="canvas_items"
+[autoload]
+
+NPCDialogueManager="*res://Npc/scripts/NPCDialogueManager.gd"
 
 [editor_plugins]
 

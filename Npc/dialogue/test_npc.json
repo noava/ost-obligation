@@ -1,0 +1,33 @@
+{
+  "intro": {
+	"name": "Test NPC",
+	"text": [
+	  "Hello! I am a test npc"
+	],
+	"choices": [
+	  {
+		"text": "Tell me more.",
+		"next": "more_info"
+	  },
+	  {
+		"text": "That's cool!",
+		"next": "goodbye"
+	  }
+	],
+	"action": ["mark_interacted"]
+  },
+
+  "more_info": {
+	"name": "Test NPC",
+	"text": [
+	  "i am a test npc"
+	]
+  },
+
+  "goodbye": {
+	"name": "Test NPC",
+	"text": [
+	  "Goodbye"
+	]
+  }
+}
