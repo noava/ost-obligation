@@ -14,7 +14,8 @@ var held_item_type: String = "none"
 var placed_bindle: Node3D = null
 var held_slot_index = null
 var ui_slot = null
-
+var carried_item: PackedScene = null
+var is_carrying: bool = false
 
 @export_category("Key Binds")
 @export_subgroup("Interacting")
@@ -31,6 +32,8 @@ func _physics_process(_delta: float) -> void:
 	# Handle holding items
 	for i in range(item_keys.size()):
 		if Input.is_action_just_pressed(item_keys[i]):
+			if is_carrying:
+				place_carried_item()
 			if held_slot_index == i:
 				remove_held_item()
 			else:
@@ -45,7 +48,9 @@ func _physics_process(_delta: float) -> void:
 
 	# Handle holding bindle
 	if Input.is_action_just_pressed(KEY_BIND_BINDLE):
-		if held_item_type != "bindle" and not is_bindle_placed:
+		if is_carrying:
+			place_carried_item()
+		if held_item_type != "bindle" and not is_bindle_placed and not is_carrying:
 			hold_bindle()
 		else:
 			remove_held_item()
@@ -57,6 +62,19 @@ func _physics_process(_delta: float) -> void:
 	# Pickup bindle
 	if Input.is_action_just_pressed(KEY_BIND_BINDLE) and is_bindle_placed:
 		pick_up_bindle()
+	
+	# Carry item
+	var collider = head_ray_cast.get_collider()
+	if collider and collider.has_method("get_carryable_node"):
+		if Input.is_action_just_pressed(KEY_PICKUP):
+			if collider.get_carryable_node() and held_item_type == "none":
+				carry_item_from_world(collider)
+			else:
+				print("Cannot carry this")
+
+	# Drop carried item
+	if Input.is_action_just_pressed(KEY_PLACE) and not held_item_type == "bindle" and not held_slot_index:
+		place_carried_item()
 
 func hold_item(slot_index: int):
 	remove_held_item()
@@ -85,6 +103,7 @@ func remove_held_item():
 		item_holder.get_child(0).queue_free()
 	held_item_type = "none"
 	is_holding = false
+	carried_item = null
 	if held_slot_index:
 		player_inv.ui_inventory.highlight_slot(held_slot_index)
 	held_slot_index = null
@@ -105,3 +124,33 @@ func pick_up_bindle():
 		is_bindle_placed = false
 		hold_bindle()
 		placed_bindle.queue_free()
+
+func carry_item_from_world(item_node: Node3D):
+	place_carried_item()
+	is_carrying = true
+	item_node.get_parent().remove_child(item_node)
+	item_node.grab_item(true)
+	item_node.position = Vector3(0, 0, 0)
+	item_node.rotation = Vector3(0, 0, 0)
+	item_holder.add_child(item_node)
+
+func place_carried_item():
+	if not is_carrying or item_holder.get_child_count() == 0:
+		return
+	var carried_node = item_holder.get_child(0)
+	item_holder.remove_child(carried_node)
+	get_tree().current_scene.add_child(carried_node)
+
+	carried_node.rotation.y = player_model.rotation.y - PI
+	
+	if head_ray_cast.is_colliding():
+		var drop_position = head_ray_cast.get_collision_point()
+		carried_node.global_transform.origin = drop_position
+	else:
+		var forward = player_model.global_transform.basis.z.normalized()
+		var drop_position = player_model.global_transform.origin + forward * 1.5
+		carried_node.global_transform.origin = drop_position
+	
+	carried_node.grab_item(false)
+	remove_held_item()
+	is_carrying = false

@@ -55,7 +55,7 @@ func update_animation_states():
 				curAnim = WALK
 			elif player_movement.speed == player_movement.SPRINT_SPEED:
 				curAnim = RUN
-		elif player_holditem.is_holding:
+		elif player_holditem.is_holding or player_holditem.is_carrying:
 			curAnim = HOLD
 		else:
 			curAnim = IDLE
