@@ -4,10 +4,13 @@ const Slot = preload("res://Inventory/InvData/Slot/3d_slot.tscn")
 
 @onready var item_grid: Node3D = $ItemGrid
 
-func set_inventory_data(inventory_data: InventoryData) -> void:
-	populate_item_grid(inventory_data.slot_datas)
+var inventory_data: InventoryData
+
+func set_inventory_data(new_inventory_data: InventoryData) -> void:
+	self.inventory_data = new_inventory_data
+	populate_item_grid(new_inventory_data)
 	
-func populate_item_grid(slot_datas: Array[SlotData]) -> void:
+func populate_item_grid(inventory_data: InventoryData) -> void:
 	for child in item_grid.get_children():
 		child.queue_free()
 	
@@ -18,8 +21,8 @@ func populate_item_grid(slot_datas: Array[SlotData]) -> void:
 	var spacing_y = grid_height / (grid_size - 1)
 	
 	# First three items are in hand
-	for i in range(3, len(slot_datas)):
-		var slot_data = slot_datas[i]
+	for i in range(3, len(inventory_data.slot_datas)):
+		var slot_data = inventory_data.slot_datas[i]
 		var slot = Slot.instantiate()
 		item_grid.add_child(slot)
 
