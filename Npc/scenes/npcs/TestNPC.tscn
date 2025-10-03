@@ -12,7 +12,6 @@
 script = ExtResource("1_xsc3t")
 dialogue_id = "intro"
 dialogue_json_file = ExtResource("2_ns87x")
-voice_lines = Array[AudioStream]([ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk"), ExtResource("3_gr3uk")])
 include_random_voice_lines = true
 random_voice_lines = Array[AudioStream]([ExtResource("3_gr3uk")])
 

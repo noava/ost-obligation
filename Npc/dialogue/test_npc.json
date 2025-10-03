@@ -4,6 +4,9 @@
 	"text": [
 	  "Hello! I am a test npc"
 	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav"
+	],
 	"choices": [
 	  {
 		"text": "Tell me more.",
@@ -21,6 +24,9 @@
 	"name": "Test NPC",
 	"text": [
 	  "i am a test npc"
+	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav"
 	]
   },
 
@@ -28,6 +34,9 @@
 	"name": "Test NPC",
 	"text": [
 	  "Goodbye"
+	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav"
 	]
   }
 }

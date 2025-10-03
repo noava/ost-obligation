@@ -54,6 +54,15 @@ func get_current_dialogue_text():
 		return process_dialogue_variables(text_array[current_dialogue_index])
 	return ""
 
+func get_current_dialogue_audio() -> String:
+	if not is_dialogue_active or current_dialogue.is_empty():
+		return ""
+	
+	var audio_array = current_dialogue.get("audio", [])
+	if current_dialogue_index < audio_array.size():
+		return audio_array[current_dialogue_index]
+	return ""
+
 func process_dialogue_variables(text: String) -> String:
 	if current_npc and current_npc.has_method("get_player_name"):
 		text = text.replace("&", current_npc.get_player_name())

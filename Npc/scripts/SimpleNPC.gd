@@ -9,7 +9,6 @@ class_name SimpleNPC
 @export var can_interact: bool = true
 
 @export var dialogue_json_file: Resource
-@export var voice_lines: Array[AudioStream] = []
 @export var use_recorded_voice_lines: bool = true
 
 @export var include_random_voice_lines: bool = false
@@ -275,23 +274,24 @@ func start_dialogue():
 	else:
 		print("⚠️ NPCDialogueManager not found or dialogue failed to start")
 
-func play_dialogue_voice_line(dialogue_index: int):
+func play_dialogue_voice_from_path(audio_path: String):
+	if audio_path == "" or audio_path == null:
+		return
 	
-	if use_recorded_voice_lines and voice_lines.size() > dialogue_index:
-		var audio_file = voice_lines[dialogue_index]
-		
-		if audio_file and voice_audio_player:
-			voice_audio_player.stream = audio_file
-			voice_audio_player.pitch_scale = voice_pitch
-			voice_audio_player.volume_db = voice_volume
-			voice_audio_player.play()
-		else:
-			if not audio_file:
-				print("⚠️ No audio file at index ", dialogue_index)
-			if not voice_audio_player:
-				print("⚠️ No voice_audio_player found")
+	if not voice_audio_player:
+		print("⚠️ No voice_audio_player found")
+		return
+	
+	# Load the audio file from the path
+	var audio_file = load(audio_path)
+	
+	if audio_file and audio_file is AudioStream:
+		voice_audio_player.stream = audio_file
+		voice_audio_player.pitch_scale = voice_pitch
+		voice_audio_player.volume_db = voice_volume
+		voice_audio_player.play()
 	else:
-		print("⚠️ Voice lines not enabled or index out of range")
+		print("⚠️ Failed to load audio file: ", audio_path)
 
 func play_typewriter_sound():
 	if typewriter_sound and typewriter_audio_player:
@@ -300,16 +300,13 @@ func play_typewriter_sound():
 		typewriter_audio_player.volume_db = voice_volume - 10.0
 		typewriter_audio_player.play()
 
-func get_current_dialogue_audio_index() -> int:
-	var dialogue_manager = get_node_or_null("/root/NPCDialogueManager")
-	if dialogue_manager and dialogue_manager.current_npc == self:
-		return dialogue_manager.current_dialogue_index
-	return -1
-
 func play_dialogue_voice(_voice_id: String = "", _voice_config: Dictionary = {}):
 	if use_recorded_voice_lines:
-		var audio_index = get_current_dialogue_audio_index()
-		play_dialogue_voice_line(audio_index)
+		var dialogue_manager = get_node_or_null("/root/NPCDialogueManager")
+		if dialogue_manager:
+			var audio_path = dialogue_manager.get_current_dialogue_audio()
+			if audio_path != "":
+				play_dialogue_voice_from_path(audio_path)
 
 func play_animation(anim_name: String):
 	if animation_player and animation_player.has_animation(anim_name):
