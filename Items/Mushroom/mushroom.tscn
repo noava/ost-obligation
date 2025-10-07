@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvrmvbt67x8gd"]
+[gd_scene load_steps=4 format=3 uid="uid://bbujmsvbc5myp"]
 
 [ext_resource type="PackedScene" uid="uid://cwmeqnh4fdce7" path="res://Items/Mushroom/Mushroom.blend" id="1_l6vnn"]
 
@@ -19,3 +19,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5248754, 0)
 shape = SubResource("BoxShape3D_4wtdk")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+volume_db = -15.0
+pitch_scale = 0.83

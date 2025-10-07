@@ -26,7 +26,7 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "player_model")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "player_model") groups=["player"]]
 collision_layer = 3
 script = ExtResource("1_btcbx")
 head = NodePath("CameraPivot")
