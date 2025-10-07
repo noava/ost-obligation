@@ -8,9 +8,9 @@ var inventory_data: InventoryData
 
 func set_inventory_data(new_inventory_data: InventoryData) -> void:
 	self.inventory_data = new_inventory_data
-	populate_item_grid(new_inventory_data)
+	populate_item_grid()
 	
-func populate_item_grid(inventory_data: InventoryData) -> void:
+func populate_item_grid() -> void:
 	for child in item_grid.get_children():
 		child.queue_free()
 	
@@ -27,7 +27,7 @@ func populate_item_grid(inventory_data: InventoryData) -> void:
 		item_grid.add_child(slot)
 
 		var grid_index = i - 3
-		var row = int(grid_index / grid_size)
+		var row = floori(float(grid_index) / float(grid_size))
 		var col = grid_index % grid_size
 		slot.position = Vector3(col * spacing_x - grid_width / 2, 0, row * spacing_y - grid_height / 2)
 

@@ -39,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 			else:
 				hold_item(i)
 	
-	# Store items between hand and inventory # TODO: Place items on floor
+	# Store and merge items between hand and inventory
 	if Input.is_action_just_pressed(KEY_PICKUP) and not held_item_type == "bindle":
 		if held_slot_index != null and player_inv.get_highlighted_slot():
 			var target_slot_index = player_inv.get_highlighted_slot()
@@ -72,9 +72,12 @@ func _physics_process(_delta: float) -> void:
 			else:
 				print("Cannot carry this")
 
-	# Drop carried item
-	if Input.is_action_just_pressed(KEY_PLACE) and not held_item_type == "bindle" and not held_slot_index:
-		place_carried_item()
+	# Drop carried items or place items
+	if Input.is_action_just_pressed(KEY_PLACE) and not held_item_type == "bindle":
+		if not held_slot_index:
+			place_carried_item()
+		
+		drop_item()
 
 func hold_item(slot_index: int):
 	remove_held_item()
@@ -89,6 +92,31 @@ func hold_item(slot_index: int):
 		held_item_type = slot_data.item_data.name
 
 	player_inv.ui_inventory.highlight_slot(slot_index)
+
+func drop_item():
+	if held_slot_index == null:
+		return
+	
+	var slot_data = player_inv.inventory_data.slot_datas[held_slot_index]
+	if slot_data and slot_data.item_data:
+		var collectable_scene = preload("res://Items/Collectable/collectable.tscn")
+		var collectable_instance = collectable_scene.instantiate()
+		
+		collectable_instance.item_data = slot_data.item_data
+		collectable_instance.quantity = slot_data.quantity
+		
+		get_tree().current_scene.add_child(collectable_instance)
+		
+		if head_ray_cast.is_colliding():
+			collectable_instance.global_position = head_ray_cast.get_collision_point()
+		else:
+			var forward = player_model.global_transform.basis.z.normalized()
+			collectable_instance.global_position = player_model.global_position + forward * 1.5
+		
+		player_inv.inventory_data.slot_datas[held_slot_index] = null
+		player_inv.ui_inventory.set_inventory_data(player_inv.inventory_data)
+	
+	remove_held_item()
 
 func hold_bindle():
 	remove_held_item()
@@ -128,8 +156,8 @@ func pick_up_bindle():
 func carry_item_from_world(item_node: Node3D):
 	place_carried_item()
 	is_carrying = true
-	item_node.get_parent().remove_child(item_node)
 	item_node.grab_item(true)
+	item_node.get_parent().remove_child(item_node)
 	item_node.position = Vector3(0, 0, 0)
 	item_node.rotation = Vector3(0, 0, 0)
 	item_holder.add_child(item_node)

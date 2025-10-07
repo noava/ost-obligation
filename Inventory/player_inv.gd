@@ -37,8 +37,13 @@ func move_item_to_slot(from_index: int, to_index: int) -> void:
 	var from_slot_data = inventory_data.slot_datas[from_index]
 	var to_slot_data = inventory_data.slot_datas[to_index]
 
-	inventory_data.slot_datas[to_index] = from_slot_data
-	inventory_data.slot_datas[from_index] = to_slot_data
+	# If items are the same and stackable, merge them
+	if from_slot_data and to_slot_data and from_slot_data.item_data == to_slot_data.item_data and from_slot_data.item_data.stackable:
+		to_slot_data.quantity += from_slot_data.quantity
+		inventory_data.slot_datas[from_index] = null
+	else:
+		inventory_data.slot_datas[to_index] = from_slot_data
+		inventory_data.slot_datas[from_index] = to_slot_data
 
 	# 3D
 	var picnic = get_tree().current_scene.get_node_or_null("Picnic")
