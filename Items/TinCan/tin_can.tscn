@@ -8,8 +8,13 @@ height = 1.13
 radius = 0.38
 
 [node name="TinCan" instance=ExtResource("1_ftlp2")]
+can_sleep = false
 script = ExtResource("2_355d6")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565, 0)
 shape = SubResource("CylinderShape3D_7jucl")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." index="2"]
+volume_db = -15.0
+pitch_scale = 2.0
