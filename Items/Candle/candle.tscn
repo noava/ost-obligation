@@ -38,7 +38,7 @@ shadow_enabled = true
 omni_range = 10.0
 omni_shadow_mode = 0
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+[node name="Flame" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.122877, 0)
 material_override = SubResource("ShaderMaterial_qtvd5")
 mesh = SubResource("PlaneMesh_dd2hg")

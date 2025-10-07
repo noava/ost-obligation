@@ -3,7 +3,6 @@ extends CharacterBody3D
 @export var head: Node3D
 @export var player_model: Node3D
 var input_direction
-@export var inventory_data: InventoryData
 
 @export_category("Movement")
 @export_subgroup("Settings")
@@ -20,9 +19,6 @@ var acceleration = ACCELERATION
 # Step up
 @export var MAX_STEP_HEIGHT := 0.5
 @onready var step_ray: RayCast3D = $"LilMouseGuy/rig/Skeleton3D/Torso/SteppingRay"
-
-func _ready() -> void:
-	pass
 
 func _physics_process(delta: float) -> void:
 	move_player(delta)
