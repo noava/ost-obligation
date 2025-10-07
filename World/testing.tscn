@@ -1,12 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://dicdkiket4dqb"]
+[gd_scene load_steps=27 format=3 uid="uid://dicdkiket4dqb"]
 
-[ext_resource type="PackedScene" uid="uid://r3qmj14esiyb" path="res://Items/Cheese/cheese.tscn" id="1_ffbi0"]
 [ext_resource type="PackedScene" uid="uid://vgsou12k4ck" path="res://Player/player.tscn" id="2_148ls"]
 [ext_resource type="PackedScene" uid="uid://dl6lidtdlkul5" path="res://Items/Candle/candle.tscn" id="3_wa13d"]
 [ext_resource type="Script" uid="uid://dbws845oprq52" path="res://Items/Effects/floating.gd" id="4_ga483"]
-[ext_resource type="PackedScene" uid="uid://bf3nrgd83vnfw" path="res://Items/Candle/Candle.blend" id="5_vr1eo"]
 [ext_resource type="Texture2D" uid="uid://u0msqg4hf1bq" path="res://World/textures/forest.png" id="6_6c6s6"]
-[ext_resource type="PackedScene" uid="uid://ctp16tjjqj7ei" path="res://Items/Rat_test/rat.blend" id="7_vr1eo"]
+[ext_resource type="PackedScene" uid="uid://ctsfewu7pa0je" path="res://Items/TinCan/tin_can.tscn" id="8_la5cf"]
+[ext_resource type="Texture2D" uid="uid://cd6aedlnuhi48" path="res://Items/TinCan/Images/TinCanGas.png" id="9_3i21j"]
+[ext_resource type="Texture2D" uid="uid://dgugqrfinn40b" path="res://Items/TinCan/Images/TinCanPorkBeans.png" id="10_gd5i3"]
+[ext_resource type="PackedScene" uid="uid://bbujmsvbc5myp" path="res://Items/Mushroom/mushroom.tscn" id="11_8s25l"]
+[ext_resource type="Texture2D" uid="uid://dys1gha6ovy2m" path="res://Items/TinCan/Images/TinCanPeaches.png" id="11_mem8s"]
+[ext_resource type="Texture2D" uid="uid://cdrgpk80xerss" path="res://Items/TinCan/Images/TinCanGreenBeans.png" id="12_frd5u"]
+[ext_resource type="PackedScene" uid="uid://b6sbqk4g5utx2" path="res://Items/Collectable/collectable.tscn" id="12_mem8s"]
+[ext_resource type="Resource" uid="uid://bq1v2gmayluyh" path="res://Items/Cheese/cheese.tres" id="13_frd5u"]
+[ext_resource type="Resource" uid="uid://qdmv71eispfw" path="res://Items/Candle/candle.tres" id="14_frd5u"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
 energy_multiplier = 0.0
@@ -86,38 +92,23 @@ mesh = SubResource("PlaneMesh_wa13d")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_6c6s6")
 
-[node name="Cheesus" type="Node3D" parent="."]
-script = ExtResource("4_ga483")
-
-[node name="Cheese" parent="Cheesus" instance=ExtResource("1_ffbi0")]
-transform = Transform3D(1.4867564, 0, -1.3377426, 0, 2, 0, 1.3377426, 0, 1.4867564, -3.8034701, 0.26861942, 5.0195723)
-
-[node name="Cheese2" parent="Cheesus" instance=ExtResource("1_ffbi0")]
-transform = Transform3D(0.935894, 0, -0.352283, 0, 1, 0, 0.352283, 0, 0.935894, 4.04081, 3.79592, -0.547579)
-
-[node name="Cheese3" parent="Cheesus" instance=ExtResource("1_ffbi0")]
-transform = Transform3D(0.59325, 0, 0.805018, 0, 1, 0, -0.805018, 0, 0.59325, -2.60884, 2.03672, -0.352647)
-
-[node name="Cheese4" parent="Cheesus" instance=ExtResource("1_ffbi0")]
-transform = Transform3D(0.886276, 0, -0.463157, 0, 1, 0, 0.463157, 0, 0.886276, 1.873791, 2.34316, 4.69852)
-
 [node name="Player" parent="." instance=ExtResource("2_148ls")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 1.52296)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.43712, 0.283849, 3.52296)
 
 [node name="Candles" type="Node3D" parent="."]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -3.14113, 2.62034, 7.7726)
 
 [node name="Candle" parent="Candles" instance=ExtResource("3_wa13d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05593133, -0.4977518, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7704967, 0)
 script = ExtResource("4_ga483")
 
 [node name="Candle2" parent="Candles" instance=ExtResource("3_wa13d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4147, 0.310352, -3.20793)
-visible = false
 script = ExtResource("4_ga483")
 
-[node name="Candle3" parent="Candles" instance=ExtResource("5_vr1eo")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.32866836, -0.20716515, -0.2023145)
+[node name="Candle3" parent="Candles" instance=ExtResource("3_wa13d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.43453, 0.099517256, -1.3153374)
+script = ExtResource("4_ga483")
 
 [node name="Forest" type="Node3D" parent="."]
 transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 0, 0, 0)
@@ -195,31 +186,109 @@ skeleton = NodePath("../..")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stairs/MeshInstance3D4/StaticBody3D"]
 shape = SubResource("BoxShape3D_6c6s6")
 
-[node name="mousetrap" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.731303, 0.021389842, 2.0213447)
-script = null
+[node name="Toys" type="Node3D" parent="."]
 
-[node name="mousetrap2" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-physics_interpolation_mode = 0
-auto_translate_mode = 0
-editor_description = ""
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 4.9475045)
-script = null
+[node name="TinCan" parent="Toys" instance=ExtResource("8_la5cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8462167, 0, 5.826157)
+image = ExtResource("9_3i21j")
 
-[node name="rat2" parent="." instance=ExtResource("7_vr1eo")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3543916, -0.08336043, -2.262766)
+[node name="TinCan2" parent="Toys" instance=ExtResource("8_la5cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8231218, 0, 4.0519166)
+image = ExtResource("10_gd5i3")
+is_carryable = false
+
+[node name="TinCan3" parent="Toys" instance=ExtResource("8_la5cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9879575, 0, 2.260669)
+image = ExtResource("12_frd5u")
+
+[node name="TinCan4" parent="Toys" instance=ExtResource("8_la5cf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8937616, 0, 0.78382874)
+image = ExtResource("11_mem8s")
+
+[node name="Mushroom" parent="Toys" instance=ExtResource("11_8s25l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8429904, 0.05545944, -1.1483002)
+
+[node name="Mushroom2" parent="Toys" instance=ExtResource("11_8s25l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7672412, 0.055458486, -2.7040212)
+
+[node name="Cheesus" type="Node3D" parent="."]
+
+[node name="Cheese" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.171, 0, -2.938)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese2" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1714039, 0, -0.82349086)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese3" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1714039, 0, 1.4733238)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese4" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1714039, 0, 3.4666564)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese5" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1714039, 0, 5.943389)
+item_data = ExtResource("14_frd5u")
+
+[node name="Cheese6" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5254369, 0, -2.9382107)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese7" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5254369, 0, -0.82349086)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese8" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5254369, 0, 1.4733238)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese9" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5254369, 0, 3.4666564)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese10" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5254369, 0, 5.943389)
+item_data = ExtResource("14_frd5u")
+
+[node name="Cheese11" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.850668, 0, -2.9382107)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese12" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.850668, 0, -0.82349086)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese13" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.850668, 0, 1.4733238)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese14" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.850668, 0, 3.4666564)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese15" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.850668, 0, 5.943389)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese16" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, -2.9382107)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese17" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, -0.82349086)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese18" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, 1.4733238)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese19" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, 3.4666564)
+item_data = ExtResource("13_frd5u")
+
+[node name="Cheese20" parent="Cheesus" instance=ExtResource("12_mem8s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, 5.943389)
+item_data = ExtResource("13_frd5u")
