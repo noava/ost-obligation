@@ -241,7 +241,6 @@ func handle_wander_movement(delta):
 			velocity = direction * patrol_speed
 			move_and_slide()
 			
-			# Optionally rotate to face movement direction
 			if direction.length() > 0:
 				var target_rotation = atan2(direction.x, direction.z)
 				rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
