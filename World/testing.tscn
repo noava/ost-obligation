@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://b6sbqk4g5utx2" path="res://Items/Collectable/collectable.tscn" id="12_mem8s"]
 [ext_resource type="Resource" uid="uid://bq1v2gmayluyh" path="res://Items/Cheese/cheese.tres" id="13_frd5u"]
 [ext_resource type="Resource" uid="uid://qdmv71eispfw" path="res://Items/Candle/candle.tres" id="14_frd5u"]
+[ext_resource type="PackedScene" uid="uid://delqehyij7xqp" path="res://Npc/scenes/npcs/TestNPC.tscn" id="6_vr1eo"]
+[ext_resource type="PackedScene" uid="uid://dpr8gygqb0yxd" path="res://Npc/scenes/npcs/TonyTheMob.tscn" id="7_vr1eo"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_wa13d"]
 energy_multiplier = 0.0
@@ -292,3 +294,8 @@ item_data = ExtResource("13_frd5u")
 [node name="Cheese20" parent="Cheesus" instance=ExtResource("12_mem8s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9869175, 0, 5.943389)
 item_data = ExtResource("13_frd5u")
+[node name="TestNpc" parent="." instance=ExtResource("6_vr1eo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8369738, 0.6429887, 0)
+
+[node name="TonyTheMob" parent="." instance=ExtResource("7_vr1eo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.2581816, 1.1259412, 0)

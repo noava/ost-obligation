@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpr8gygqb0yxd"]
+
+[ext_resource type="Script" uid="uid://btvxiwrlh0odg" path="res://Npc/scripts/SimpleNPC.gd" id="1_tlp2w"]
+[ext_resource type="JSON" path="res://Npc/dialogue/tony_the_mob.json" id="2_x5ujm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_50fwg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tlp2w"]
+
+[node name="TonyTheMob" type="CharacterBody3D"]
+script = ExtResource("1_tlp2w")
+npc_name = "Tony The Mob"
+dialogue_id = "intro"
+dialogue_json_file = ExtResource("2_x5ujm")
+movement_type = "wander"
+wander_radius = 10.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_50fwg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_tlp2w")

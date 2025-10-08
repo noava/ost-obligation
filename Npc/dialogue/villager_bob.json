@@ -1,0 +1,49 @@
+{
+  "intro": {
+    "name": "Villager Bob",
+    "text": [
+      "Hello, I'm Bob!",
+      "I'm a simple villager in this world.",
+      "What brings you here today?"
+    ],
+    "audio": [
+      "res://Npc/audio/voice_lines/test.wav",
+      "res://Npc/audio/voice_lines/test.wav",
+      "res://Npc/audio/voice_lines/test.wav"
+    ],
+    "choices": [
+      {
+        "text": "Just exploring.",
+        "next": "exploring"
+      },
+      {
+        "text": "Looking for information.",
+        "next": "information"
+      }
+    ]
+  },
+
+  "exploring": {
+    "name": "Villager Bob",
+    "text": [
+      "Ah, an explorer! How wonderful.",
+      "There's much to see in these lands."
+    ],
+    "audio": [
+      "res://Npc/audio/voice_lines/test.wav",
+      "res://Npc/audio/voice_lines/test.wav"
+    ]
+  },
+
+  "information": {
+    "name": "Villager Bob",
+    "text": [
+      "Information, you say?",
+      "I know quite a bit about the local area."
+    ],
+    "audio": [
+      "res://Npc/audio/voice_lines/test.wav",
+      "res://Npc/audio/voice_lines/test.wav"
+    ]
+  }
+}
