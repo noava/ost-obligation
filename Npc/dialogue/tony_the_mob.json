@@ -1,0 +1,51 @@
+{
+  "intro": {
+	"name": "Tony the Mob",
+	"text": [
+      "Hey Antony! How you dooing?"
+	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav"
+	],
+	"choices": [
+	  {
+		"text": "I'm doing good man",
+		"next": "doing_good"
+	  },
+	  {
+		"text": "I don't feel well",
+		"next": "not_feeling_well"
+	  }
+	]
+  },
+
+  "doing_good": {
+	"name": "Tony the Mob",
+	"text": [
+	  "Ah, that's what I like to hear!",
+	  "Good to see you're keepin' your spirits up.",
+      "You know, in this business, attitude is everything."
+	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav",
+	  "res://Npc/audio/voice_lines/test.wav",
+	  "res://Npc/audio/voice_lines/test.wav"
+	]
+  },
+
+  "not_feeling_well": {
+	"name": "Tony the Mob",
+	"text": [
+	  "Aw, what's the matter, pal?",
+	  "You look a little pale there.",
+	  "Maybe you need some of my special medicine, eh?",
+      "Don't worry, Tony takes care of his friends."
+	],
+	"audio": [
+	  "res://Npc/audio/voice_lines/test.wav",
+	  "res://Npc/audio/voice_lines/test.wav",
+	  "res://Npc/audio/voice_lines/test.wav",
+	  "res://Npc/audio/voice_lines/test.wav"
+	]
+  }
+}
