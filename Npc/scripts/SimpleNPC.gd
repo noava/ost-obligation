@@ -57,6 +57,8 @@ var original_position: Vector3
 var player_in_range: bool = false
 var last_random_voice_time: float = 0.0
 var is_playing_random_voice: bool = false
+var wander_target: Vector3 = Vector3.ZERO
+var has_wander_target: bool = false
 
 func _ready():
 	original_position = global_transform.origin
@@ -213,23 +215,41 @@ func handle_patrol_movement(delta):
 		move_and_slide()
 
 func handle_wander_movement(delta):
-	movement_timer += delta
-	if movement_timer >= idle_time_at_points:
-		var random_offset = Vector3(
-			randf_range(-wander_radius, wander_radius),
-			0,
-			randf_range(-wander_radius, wander_radius)
-		)
-		var target_pos = original_position + random_offset
+	# If we don't have a target, we're in idle state
+	if not has_wander_target:
+		play_idle_animation()
+		movement_timer += delta
 		
-		var direction = (target_pos - global_transform.origin).normalized()
-		if global_transform.origin.distance_to(target_pos) > 1.0:
+		# After idle time, pick a new random target
+		if movement_timer >= idle_time_at_points:
+			var random_offset = Vector3(
+				randf_range(-wander_radius, wander_radius),
+				0,
+				randf_range(-wander_radius, wander_radius)
+			)
+			wander_target = original_position + random_offset
+			has_wander_target = true
+			movement_timer = 0.0
+	else:
+		# We have a target, move towards it
+		var distance_to_target = global_transform.origin.distance_to(wander_target)
+		
+		if distance_to_target > 0.5:
+			# Still moving to target
 			play_walk_animation()
+			var direction = (wander_target - global_transform.origin).normalized()
 			velocity = direction * patrol_speed
 			move_and_slide()
+			
+			# Optionally rotate to face movement direction
+			if direction.length() > 0:
+				var target_rotation = atan2(direction.x, direction.z)
+				rotation.y = lerp_angle(rotation.y, target_rotation, delta * 5.0)
 		else:
+			# Reached target, go back to idle
+			has_wander_target = false
 			movement_timer = 0.0
-			play_idle_animation()
+			velocity = Vector3.ZERO
 
 func face_player():
 	if player_reference:

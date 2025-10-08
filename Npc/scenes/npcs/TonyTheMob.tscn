@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpr8gygqb0yxd"]
+[gd_scene load_steps=5 format=3 uid="uid://dpr8gygqb0yxd"]
 
 [ext_resource type="Script" uid="uid://btvxiwrlh0odg" path="res://Npc/scripts/SimpleNPC.gd" id="1_tlp2w"]
 [ext_resource type="JSON" path="res://Npc/dialogue/tony_the_mob.json" id="2_x5ujm"]
-[ext_resource type="AudioStream" uid="uid://c0xx04822k6my" path="res://Npc/audio/voice_lines/test.wav" id="3_4hlhw"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_50fwg"]
 
@@ -13,7 +12,8 @@ script = ExtResource("1_tlp2w")
 npc_name = "Tony The Mob"
 dialogue_id = "intro"
 dialogue_json_file = ExtResource("2_x5ujm")
-voice_lines = Array[AudioStream]([ExtResource("3_4hlhw"), ExtResource("3_4hlhw"), ExtResource("3_4hlhw"), ExtResource("3_4hlhw"), ExtResource("3_4hlhw")])
+movement_type = "wander"
+wander_radius = 10.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_50fwg")
