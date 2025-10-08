@@ -90,6 +90,7 @@ center_offset = Vector3(0, 0.4, 0)
 
 [sub_resource type="Animation" id="Animation_3eqs7"]
 resource_name = "Init"
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
