@@ -9,7 +9,7 @@ albedo_texture = ExtResource("2_8nb0r")
 [sub_resource type="BoxMesh" id="BoxMesh_pmw8h"]
 size = Vector3(2, 0.005, 2)
 
-[node name="picnic" type="Node3D"]
+[node name="Picnic" type="Node3D"]
 script = ExtResource("1_s44hi")
 
 [node name="Towel" type="MeshInstance3D" parent="."]

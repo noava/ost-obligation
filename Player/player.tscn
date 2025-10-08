@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vgsou12k4ck"]
+[gd_scene load_steps=14 format=3 uid="uid://vgsou12k4ck"]
 
 [ext_resource type="PackedScene" uid="uid://diuchan7aq7bs" path="res://Player/lil_mouse_guy.tscn" id="1_4ntmi"]
 [ext_resource type="Script" uid="uid://b6c1xou4tolnr" path="res://Player/Scripts/player_movement.gd" id="1_btcbx"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://djq1guxr8cbbr" path="res://Inventory/InvData/ui_inventory.tscn" id="7_vtle1"]
 [ext_resource type="Script" uid="uid://dhqhapnrnrmbi" path="res://Inventory/player_inv.gd" id="7_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d2chr12njqcs4" path="res://Items/Bindle/bindle.svg" id="9_00tjw"]
+[ext_resource type="Texture2D" uid="uid://c0xxe4igv7uyx" path="res://Player/UI/crosshair.png" id="10_x3vf3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 radius = 0.331061
@@ -17,6 +18,7 @@ height = 1.39515
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_88m7s"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_apopc"]
+bg_color = Color(0.14509805, 0.09411765, 0.047058824, 1)
 corner_radius_top_left = 50
 corner_radius_top_right = 50
 corner_radius_bottom_right = 50
@@ -26,12 +28,11 @@ expand_margin_top = 5.0
 expand_margin_right = 5.0
 expand_margin_bottom = 5.0
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "player_model")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("head", "player_model") groups=["player"]]
 collision_layer = 3
 script = ExtResource("1_btcbx")
 head = NodePath("CameraPivot")
 player_model = NodePath("LilMouseGuy")
-inventory_data = ExtResource("2_vtle1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.698566, 0)
@@ -45,10 +46,17 @@ script = ExtResource("2_btcbx")
 target_node = NodePath(".")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 spring_length = 5.0
 margin = 0.2
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot/SpringArm3D"]
+
+[node name="HeadRayCast" type="RayCast3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+target_position = Vector3(0, 0, -3)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="PlayerAnim" type="Node3D" parent="." node_paths=PackedStringArray("player_movement", "player_holditem")]
 script = ExtResource("4_gwnis")
@@ -69,6 +77,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_x3vf3")
+inventory_data = ExtResource("2_vtle1")
 
 [node name="UiInventory" parent="UI/InventoryInterface" instance=ExtResource("7_vtle1")]
 layout_mode = 1
@@ -77,7 +86,7 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -336.0
+offset_left = -287.99976
 offset_top = -100.0
 offset_right = -119.999756
 offset_bottom = -20.0
@@ -116,3 +125,18 @@ layout_mode = 2
 texture = ExtResource("9_00tjw")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="Crosshair" type="TextureRect" parent="UI"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_x3vf3")
+expand_mode = 1

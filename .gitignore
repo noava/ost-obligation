@@ -7,3 +7,6 @@
 
 # Blender backup files
 *.blend1
+
+# GitHub files
+.github/
