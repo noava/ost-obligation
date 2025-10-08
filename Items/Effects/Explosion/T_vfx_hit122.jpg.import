@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvrfmj7ag6jfj"
-path.s3tc="res://.godot/imported/T_PerlinNoise_46_inv.png-313ce30d49372f8a0bb1b4021c9e749a.s3tc.ctex"
+uid="uid://biskoqbfdncii"
+path.s3tc="res://.godot/imported/T_vfx_hit122.jpg-46628eadf5b21a56acbf245dd47a37af.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://World/textures/T_PerlinNoise_46_inv.png"
-dest_files=["res://.godot/imported/T_PerlinNoise_46_inv.png-313ce30d49372f8a0bb1b4021c9e749a.s3tc.ctex"]
+source_file="res://Items/Effects/Explosion/T_vfx_hit122.jpg"
+dest_files=["res://.godot/imported/T_vfx_hit122.jpg-46628eadf5b21a56acbf245dd47a37af.s3tc.ctex"]
 
 [params]
 

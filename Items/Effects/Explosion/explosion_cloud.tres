@@ -1,8 +1,8 @@
 [gd_resource type="VisualShader" load_steps=36 format=3 uid="uid://dxxb4ytlltj0j"]
 
-[ext_resource type="Texture2D" uid="uid://d0h7gj2707184" path="res://World/textures/T_VFX_Noise_44xainv.png" id="1_2cuw4"]
-[ext_resource type="Texture2D" uid="uid://dpxi5kkckckd1" path="res://World/textures/T_cloudy_noise_211c.png" id="1_vs4f6"]
-[ext_resource type="Texture2D" uid="uid://bvrfmj7ag6jfj" path="res://World/textures/T_PerlinNoise_46_inv.png" id="2_2cuw4"]
+[ext_resource type="Texture2D" uid="uid://d0h7gj2707184" path="res://Items/Effects/Explosion/T_VFX_Noise_44xainv.png" id="1_2cuw4"]
+[ext_resource type="Texture2D" uid="uid://dpxi5kkckckd1" path="res://Items/Effects/Explosion/T_cloudy_noise_211c.png" id="1_vs4f6"]
+[ext_resource type="Texture2D" uid="uid://bvrfmj7ag6jfj" path="res://Items/Effects/Explosion/T_PerlinNoise_46_inv.png" id="2_2cuw4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_r2vxh"]
 noise_type = 2
