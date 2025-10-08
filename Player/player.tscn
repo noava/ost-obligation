@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=14 format=3 uid="uid://vgsou12k4ck"]
-=======
 [gd_scene load_steps=15 format=3 uid="uid://vgsou12k4ck"]
->>>>>>> a2f9e1e (npc system)
 
 [ext_resource type="PackedScene" uid="uid://diuchan7aq7bs" path="res://Player/lil_mouse_guy.tscn" id="1_4ntmi"]
 [ext_resource type="Script" uid="uid://b6c1xou4tolnr" path="res://Player/Scripts/player_movement.gd" id="1_btcbx"]
@@ -13,12 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://djq1guxr8cbbr" path="res://Inventory/InvData/ui_inventory.tscn" id="7_vtle1"]
 [ext_resource type="Script" uid="uid://dhqhapnrnrmbi" path="res://Inventory/player_inv.gd" id="7_x3vf3"]
 [ext_resource type="Texture2D" uid="uid://d2chr12njqcs4" path="res://Items/Bindle/bindle.svg" id="9_00tjw"]
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://c0xxe4igv7uyx" path="res://Player/UI/crosshair.png" id="10_x3vf3"]
-=======
 [ext_resource type="PackedScene" uid="uid://s81vmxwitnw4" path="res://Npc/scenes/DialogueUI.tscn" id="10_x3vf3"]
 [ext_resource type="Script" uid="uid://bd48726cfwhup" path="res://Player/Scripts/npc_interaction.gd" id="11_apopc"]
->>>>>>> a2f9e1e (npc system)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4ntmi"]
 radius = 0.331061
@@ -135,7 +128,6 @@ texture = ExtResource("9_00tjw")
 expand_mode = 1
 stretch_mode = 5
 
-<<<<<<< HEAD
 [node name="Crosshair" type="TextureRect" parent="UI"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -150,10 +142,8 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("10_x3vf3")
 expand_mode = 1
-=======
 [node name="DialogueUi" parent="UI" instance=ExtResource("10_x3vf3")]
 z_index = 10
 
 [node name="NPCInteraction" type="Node3D" parent="."]
 script = ExtResource("11_apopc")
->>>>>>> a2f9e1e (npc system)

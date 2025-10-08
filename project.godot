@@ -14,12 +14,13 @@ config/name="MouseGame"
 run/main_scene="uid://dicdkiket4dqb"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
-[display]
-
-window/stretch/mode="canvas_items"
 [autoload]
 
 NPCDialogueManager="*res://Npc/scripts/NPCDialogueManager.gd"
+
+[display]
+
+window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
