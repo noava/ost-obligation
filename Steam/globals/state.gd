@@ -1,6 +1,8 @@
 extends Node
 #https://godotsteam.com/tutorials/initializing/
 # this is shared information for the whole game (its state)
+# disables multiplayer if steam isnt open
+var steam_initialized: bool = false
 
 var single_player: bool = true
 var user_data: Dictionary = {
@@ -19,5 +21,9 @@ var lobby_data: Dictionary = {
 
 
 # must be set in code or else 😡😡😡😡
-var game_scene: String = ""
-var menu_scene: String = ""
+var game_scene: Resource = preload("res://World/Testing.tscn")
+var menu_scene: Resource = preload("res://Menu/MainMenu.tscn")
+
+# unread atm but gets updated correctly
+enum GameState { LOBBY, IN_GAME }
+var current_state: GameState = GameState.LOBBY

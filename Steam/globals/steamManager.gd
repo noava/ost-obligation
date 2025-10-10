@@ -11,7 +11,7 @@ const DEFAULT_DISTANCE = 1
 const FAR_DISTANCE = 2
 const WORLDWIDE_DISTANCE = 3
 
-var _handlers: Array[SteamHandler] = []
+var _handlers: Array[LobbyHandler] = []
 
 ########################################################
 ####################### INITIALS #######################
@@ -41,7 +41,7 @@ func initialize_steam() -> void:
 	var init: Dictionary = Steam.steamInitEx(APP_ID, true)
 	if init['status'] > Steam.STEAM_API_INIT_RESULT_OK:
 		print("Failed to initialize steam: ", init)
-		get_tree().quit()
+		return
 	
 	var steam_id = Steam.getSteamID()
 	var steam_username = Steam.getPersonaName()
@@ -52,17 +52,29 @@ func initialize_steam() -> void:
 	
 	if not owned:
 		print("the user does not own this game")
-		get_tree().quit()
+		return
+
+	State.steam_initialized = true
 
 ####################################################################
 ####################### HANDLER SUBSCRIPTION #######################
 ####################################################################
 
-func register_handler(_handler: SteamHandler):
-	_handlers.append(_handler)
+func register_handler(_handler):
+	if _handler is LobbyHandler and not _handlers.has(_handler):
+		_handlers.append(_handler)
 
-func unregister_handler(_handler: SteamHandler):
-	_handlers.erase(_handler)
+	if _handler is SessionHandler:
+		p2p.register_handler(_handler)
+
+
+func unregister_handler(_handler):
+	if _handler is LobbyHandler and _handlers.has(_handler):
+		_handlers.erase(_handler)
+
+	if _handler is SessionHandler:
+		p2p.unregister_handler(_handler)
+
 
 func notify_handlers(_method: StringName, ...args: Array):
 	for handler in _handlers:
@@ -132,8 +144,12 @@ func get_lobby_members(_lobby_id: int = -1):
 ####################### STEAM PEER FUNCTIONS #######################
 ####################################################################
 
-func load_scene_for_all(_scene: String):
+# starts the whole game
+func load_scene_for_all(_scene: Resource):
+	State.current_state = State.GameState.IN_GAME
+	Steam.setLobbyData(State.lobby_data.id, "started", "1")
 	p2p.start_game(_scene)
+
 
 #########################################################
 ####################### CALLBACKS #######################
@@ -152,11 +168,15 @@ func _on_lobby_joined(_lobby_id: int, _permissions: int, _locked: bool, response
 	if response != Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
 		return
 	
+	var _started = Steam.getLobbyData(_lobby_id, "started")
 	var _name = Steam.getLobbyData(_lobby_id, "name")
 	var _owner = Steam.getLobbyOwner(_lobby_id)
 	
 	State.lobby_data.name = _name
 	State.lobby_data.owner_id = _owner
+
+	if _started == "1":
+		State.current_state = State.GameState.IN_GAME
 	
 	if State.user_data.steam_id != _owner:
 		p2p.connect_socket(_owner)
@@ -182,6 +202,7 @@ func _on_lobby_chat_update(_lobby_id: int, _change_id: int, _making_change_id: i
 	notify_handlers("on_system_message", message)
 
 #TODO: not sure here yet
+# still not sure what to do with this yet
 func _on_lobby_data_update(_success, _lobby_id, _member_id):
 	print("lobby update??")
 

@@ -1,4 +1,4 @@
-extends SteamHandler
+extends LobbyHandler 
 
 @onready var lobbiesbox: VBoxContainer = $PopupPanel/Lobbies/Scroll/LobbiesBox
 @onready var lobbiestitle: Label = $PopupPanel/Lobbies/LobbiesTitle
@@ -14,7 +14,6 @@ extends SteamHandler
 @onready var buttons: VBoxContainer = $buttons
 
 func _ready() -> void:
-	State.game_scene = "res://World/testing.tscn"
 	SteamManager.register_handler(self)
 
 	# if the player accepted an invite

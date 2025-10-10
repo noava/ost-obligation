@@ -5,7 +5,7 @@ var stationary := false
 
 @export var head: Node3D
 @export var player_model: Node3D
-var input_direction
+var input_direction := Vector2.ZERO
 
 @export_category("Movement")
 @export_subgroup("Settings")
@@ -23,25 +23,41 @@ var acceleration = ACCELERATION
 @export var MAX_STEP_HEIGHT := 0.5
 @onready var step_ray: RayCast3D = $"LilMouseGuy/rig/Skeleton3D/Torso/SteppingRay"
 
+# makes sure camera and such follow the local player and not the host
+func set_local_player(is_local_player: bool) -> void:
+	if is_local_player:
+		camera_3d.set_current(true)
+		ui.show()
+	else:
+		camera_3d.set_current(false)
+		ui.hide()
+
+func _enter_tree() -> void:
+	if State.single_player:
+		return
+
+	var name_str = str(name)
+	if name_str.is_valid_int():
+		set_multiplayer_authority(name_str.to_int())
+		# tror ikke dette trengs
+		# get_node("MultiplayerSynchronizer").set_multiplayer_authority(name_str.to_int())
+	
+
 func _ready() -> void:
 	if State.single_player:
 		return
 
 	var name_str = str(name)
-	print("name " + name_str)
-	if name_str.is_valid_int():
-		set_multiplayer_authority(name_str.to_int(), true)
-		# get_node("MultiplayerSynchronizer").set_multiplayer_authority(name_str.to_int())
+	set_local_player(name_str == str(multiplayer.get_unique_id()))
 
 func _physics_process(delta: float) -> void:
 	if stationary:
 		return
 		
-	if State.single_player || str(multiplayer.get_unique_id()) == str(name):
+	if State.single_player || is_multiplayer_authority():
 		move_player(delta)
-	
-	step_up()
-	move_and_slide()
+		step_up()
+		move_and_slide()
 
 func move_player(delta):
 	# Jump

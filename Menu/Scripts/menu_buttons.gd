@@ -5,9 +5,13 @@ extends Control
 
 func _on_start_pressed() -> void:
 	State.single_player = true
-	get_tree().change_scene_to_file("res://World/testing.tscn")
+	get_tree().change_scene_to_file(State.game_scene.resource_path)
 
 func _on_multiplayer_pressed() -> void:
+	if !State.steam_initialized:
+		print("Steam is not initialized, cannot do multiplayer")
+		return
+
 	State.single_player = false
 	var lobby = preload("uid://ba6m63vr3xhqn")
 	var scene = lobby.instantiate()

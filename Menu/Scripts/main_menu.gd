@@ -11,7 +11,6 @@ var decay_speed := 0.02
 var stop_at := 0.003
 
 func _ready() -> void:
-	State.menu_scene = name
 	player.make_playable(false)
 
 

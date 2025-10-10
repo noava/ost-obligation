@@ -1,4 +1,4 @@
-@abstract class_name SteamHandler extends Control
+@abstract class_name LobbyHandler extends Control
 
 
 @abstract func on_chat_message(sender: String, message: String) -> void
