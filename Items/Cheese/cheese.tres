@@ -12,4 +12,5 @@ stackable = true
 texture = ExtResource("3_dsm6w")
 item_type = 3
 item_scene = ExtResource("1_w2qki")
+item_offset = Vector3(0, -0.1, 0.235)
 metadata/_custom_type_script = "uid://bswlsb0sqs4r7"

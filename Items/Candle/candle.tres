@@ -11,4 +11,5 @@ description = "Lights up my world! <3"
 texture = ExtResource("3_gqmg1")
 item_type = 1
 item_scene = ExtResource("1_c7t77")
+item_offset = Vector3(0, -0.1, 0.235)
 metadata/_custom_type_script = "uid://bswlsb0sqs4r7"

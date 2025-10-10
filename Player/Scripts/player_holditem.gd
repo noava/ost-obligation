@@ -25,6 +25,8 @@ var is_carrying: bool = false
 @export var KEY_BIND_BINDLE := "key_4"
 @export var KEY_PLACE := "q"
 @export var KEY_PICKUP := "e"
+@export var KEY_ITEM_PRIMARY := "left_click"
+@export var KEY_ITEM_SECONDARY := "right_click"
 var item_keys = [KEY_BIND_1, KEY_BIND_2, KEY_BIND_3]
 
 
@@ -78,6 +80,26 @@ func _physics_process(_delta: float) -> void:
 			place_carried_item()
 		
 		drop_item()
+	
+	if Input.is_action_just_pressed(KEY_ITEM_PRIMARY) and is_holding:
+		held_item_primary()
+	
+	if Input.is_action_just_pressed(KEY_ITEM_SECONDARY) and is_holding:
+		held_item_secondary()
+
+func held_item_primary():
+	if item_holder.get_child_count() > 0:
+		var held_item = item_holder.get_child(0)
+		
+		if held_item.has_method("primary_activation"):
+			held_item.primary_activation()
+
+func held_item_secondary():
+	if item_holder.get_child_count() > 0:
+		var held_item = item_holder.get_child(0)
+		
+		if held_item.has_method("secondary_activation"):
+			held_item.secondary_activation()
 
 func hold_item(slot_index: int):
 	remove_held_item()
@@ -87,7 +109,7 @@ func hold_item(slot_index: int):
 	if slot_data and slot_data.item_data and slot_data.item_data.item_scene:
 		is_holding = true
 		var item_instance = slot_data.item_data.item_scene.instantiate()
-		item_instance.position = Vector3(0, -0.1, 0.235)
+		item_instance.position = slot_data.item_data.item_offset
 		item_holder.add_child(item_instance)
 		held_item_type = slot_data.item_data.name
 

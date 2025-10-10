@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dl6lidtdlkul5"]
+[gd_scene load_steps=7 format=3 uid="uid://dl6lidtdlkul5"]
 
 [ext_resource type="PackedScene" uid="uid://bf3nrgd83vnfw" path="res://Items/Candle/Candle.blend" id="1_rdt7g"]
 [ext_resource type="Shader" uid="uid://cjtsd7ff5hbel" path="res://Items/Candle/candle.gdshader" id="2_c6rel"]
+[ext_resource type="Script" uid="uid://dcucds0xmionn" path="res://Items/Candle/candle.gd" id="2_qtvd5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qtvd5"]
 render_priority = 0
@@ -18,6 +19,7 @@ shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dd2hg"]
 size = Vector2(0.015, 0.05)
+center_offset = Vector3(0, 0.025, 0)
 orientation = 2
 
 [sub_resource type="FogMaterial" id="FogMaterial_c6rel"]
@@ -25,21 +27,22 @@ density = -0.8
 
 [node name="Candle" instance=ExtResource("1_rdt7g")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+script = ExtResource("2_qtvd5")
 
 [node name="Cylinder" parent="." index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125744, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12954627, 0)
 light_color = Color(1, 0.705882, 0.458824, 1)
 light_volumetric_fog_energy = 0.0
-light_size = 0.059
+light_size = 0.1
 shadow_enabled = true
 omni_range = 10.0
 omni_shadow_mode = 0
 
 [node name="Flame" type="MeshInstance3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.122877, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 material_override = SubResource("ShaderMaterial_qtvd5")
 mesh = SubResource("PlaneMesh_dd2hg")
 

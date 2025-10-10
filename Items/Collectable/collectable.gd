@@ -17,7 +17,10 @@ func _ready():
 	# Display item in 3D
 	if item_data and item_data.item_scene:
 		var item_instance = item_data.item_scene.instantiate()
-		
+
+		$CollisionShape3D.position.y = item_data.collision_height / 2.0
+		$CollisionShape3D.shape.size.y = item_data.collision_height
+
 		item.add_child(item_instance)
 
 func _process(_delta):

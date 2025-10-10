@@ -8,3 +8,5 @@ class_name ItemData
 enum ItemType { NONE, EQUIPMENT, MATERIAL, CURRENCY, OTHER }
 @export var item_type: ItemType = ItemType.NONE
 @export var item_scene: PackedScene
+@export var item_offset: Vector3 = Vector3.ZERO
+@export var collision_height: float = 0.5

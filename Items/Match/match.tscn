@@ -1,0 +1,84 @@
+[gd_scene load_steps=9 format=3 uid="uid://xdfv65oupy7f"]
+
+[ext_resource type="PackedScene" uid="uid://bvf00regpm1p4" path="res://Items/Match/match.blend" id="1_nt8qe"]
+[ext_resource type="Script" uid="uid://c1nnsfpwgklv3" path="res://Items/Match/match.gd" id="2_c3rjr"]
+[ext_resource type="Shader" uid="uid://cjtsd7ff5hbel" path="res://Items/Candle/candle.gdshader" id="3_mgmk3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mgmk3"]
+render_priority = 0
+shader = ExtResource("3_mgmk3")
+shader_parameter/time_speed = 1.5
+shader_parameter/flame_height = 1.0
+shader_parameter/distortion_strength = 0.2
+shader_parameter/flame_color = Color(1, 0.65, 0.2, 1)
+shader_parameter/glow_color = Color(1, 0.9, 0.6, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w4msd"]
+lightmap_size_hint = Vector2i(2, 2)
+size = Vector2(0.015, 0.05)
+center_offset = Vector3(0, 0.025, 0)
+orientation = 2
+
+[sub_resource type="Animation" id="Animation_w4msd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mgmk3"]
+resource_name = "hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.2217305, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n7j6a"]
+_data = {
+&"RESET": SubResource("Animation_w4msd"),
+&"hit": SubResource("Animation_mgmk3")
+}
+
+[node name="Match" instance=ExtResource("1_nt8qe")]
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999946, 0, 0, 0, 0.99999994, 0, 0, 0)
+script = ExtResource("2_c3rjr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.575, 0)
+light_color = Color(1, 0.705882, 0.458824, 1)
+light_volumetric_fog_energy = 0.0
+light_size = 0.3
+shadow_enabled = true
+omni_range = 10.0
+omni_shadow_mode = 0
+
+[node name="Flame" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(6.0507965, 0, 0, 0, 5.5788126, 0, 0, 0, 1, 0, 1.4860522, 0)
+material_override = SubResource("ShaderMaterial_mgmk3")
+mesh = SubResource("PlaneMesh_w4msd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+&"": SubResource("AnimationLibrary_n7j6a")
+}

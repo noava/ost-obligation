@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="InventoryData" load_steps=13 format=3 uid="uid://go60t57o28wu"]
+[gd_resource type="Resource" script_class="InventoryData" load_steps=14 format=3 uid="uid://go60t57o28wu"]
 
 [ext_resource type="Script" uid="uid://bdm6y0n1x3gg" path="res://Inventory/InvData/inv_data.gd" id="1_so7jr"]
 [ext_resource type="Script" uid="uid://btl2o4asmkf16" path="res://Inventory/InvData/Slot/slot_data.gd" id="2_dvdfv"]
 [ext_resource type="Resource" uid="uid://qdmv71eispfw" path="res://Items/Candle/candle.tres" id="3_dvdfv"]
 [ext_resource type="Resource" uid="uid://bq1v2gmayluyh" path="res://Items/Cheese/cheese.tres" id="4_s382f"]
+[ext_resource type="Resource" uid="uid://c6v7takcey1wu" path="res://Items/Match/match.tres" id="5_uyw00"]
 
 [sub_resource type="Resource" id="Resource_s382f"]
 script = ExtResource("2_dvdfv")
@@ -18,7 +19,7 @@ metadata/_custom_type_script = "uid://btl2o4asmkf16"
 
 [sub_resource type="Resource" id="Resource_4gg4q"]
 script = ExtResource("2_dvdfv")
-item_data = ExtResource("3_dvdfv")
+item_data = ExtResource("5_uyw00")
 metadata/_custom_type_script = "uid://btl2o4asmkf16"
 
 [sub_resource type="Resource" id="Resource_urbhy"]

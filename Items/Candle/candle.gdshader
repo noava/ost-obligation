@@ -1,4 +1,5 @@
 shader_type spatial;
+render_mode unshaded, shadows_disabled;
 
 uniform float time_speed : hint_range(0.0, 5.0) = 1.5;
 uniform float flame_height : hint_range(0.1, 2.0) = 1.0;

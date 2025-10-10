@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c6v7takcey1wu"]
+
+[ext_resource type="Script" uid="uid://bswlsb0sqs4r7" path="res://Inventory/InvData/item_data.gd" id="1_aia0b"]
+[ext_resource type="PackedScene" uid="uid://xdfv65oupy7f" path="res://Items/Match/match.tscn" id="1_qcc58"]
+[ext_resource type="Texture2D" uid="uid://dkx4p8ndggfcd" path="res://Items/Match/Matchstick.svg" id="3_w4ed4"]
+
+[resource]
+script = ExtResource("1_aia0b")
+name = "Match"
+description = "This thing burns"
+texture = ExtResource("3_w4ed4")
+item_scene = ExtResource("1_qcc58")
+item_offset = Vector3(0.05, 0, 0.08)
+collision_height = 2.0
+metadata/_custom_type_script = "uid://bswlsb0sqs4r7"
