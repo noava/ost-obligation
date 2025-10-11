@@ -39,9 +39,6 @@ func _enter_tree() -> void:
 	var name_str = str(name)
 	if name_str.is_valid_int():
 		set_multiplayer_authority(name_str.to_int())
-		# tror ikke dette trengs
-		# get_node("MultiplayerSynchronizer").set_multiplayer_authority(name_str.to_int())
-	
 
 func _ready() -> void:
 	if State.single_player:
@@ -53,7 +50,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if stationary:
 		return
-		
+
 	if State.single_player || is_multiplayer_authority():
 		move_player(delta)
 		step_up()

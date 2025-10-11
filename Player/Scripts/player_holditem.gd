@@ -29,6 +29,9 @@ var item_keys = [KEY_BIND_1, KEY_BIND_2, KEY_BIND_3]
 
 
 func _physics_process(_delta: float) -> void:
+	if !(State.single_player || is_multiplayer_authority()):
+		return
+
 	# Handle holding items
 	for i in range(item_keys.size()):
 		if Input.is_action_just_pressed(item_keys[i]):

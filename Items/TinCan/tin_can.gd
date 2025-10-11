@@ -16,6 +16,10 @@ extends Node3D
 	preload("res://Items/TinCan/Sounds/place_2.ogg")
 ]
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(1)
+
+
 func _ready() -> void:
 	if image:
 		tin_can.mesh = tin_can.mesh.duplicate()
